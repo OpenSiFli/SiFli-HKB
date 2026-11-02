@@ -3,7 +3,7 @@ title: SF32LB57 显示与图形（ePicasso 3.0 / LCD / DCMI / eZip）
 type: mcu_peripheral
 aliases: ["SF32LB57_Peripheral_Display","SF32LB57显示","SF32LB57 LCD","SF32LB57 GPU","SF32LB57 ePicasso"]
 tags: ["企业MCU","外设-显示/图形","芯片系列-SF32LB57","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 series_applicability: ["通用-两系列共用"]
 mcu_model: ["SF32LB57X","SF32LB57x"]

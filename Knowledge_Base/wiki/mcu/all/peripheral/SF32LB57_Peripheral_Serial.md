@@ -3,7 +3,7 @@ title: SF32LB57 串行通信外设（UART / I2C / SPI / CAN）
 type: mcu_peripheral
 aliases: ["SF32LB57_Peripheral_Serial","SF32LB57串口","SF32LB57 UART","SF32LB57 I2C","SF32LB57 SPI","SF32LB57 CAN"]
 tags: ["企业MCU","外设-串口","芯片系列-SF32LB57","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 series_applicability: ["通用-两系列共用"]
 mcu_model: ["SF32LB57X","SF32LB57x"]
@@ -46,17 +46,24 @@ SF32LB57 串行外设资源：**3× UART、4× I2C、2× SPI（SSP）、2× CAN�
 - **CAN** 须外接 CAN 收发器，CANH/CANL 走差分对并做 120Ω 终端匹配（按节点拓扑）。
 - 所有串行接口电平域须与外设一致，跨压域须加电平转换。
 
+## 5. UM5701 V0.1 补充（寄存器级手册）
+- **串口实例（UM §7，印刷 p152–183）**：USART1–4（§7.3 p174）、I2C1–4（§7.1 p152）、SPI1–2（§7.2 p164）、CAN1–2（§7.4 p183）、USB2.0 FS（§7.5 p183）。⚠️ 与 DS「3×UART」口径差异：UM 列 USART1–4 共 4 个实例，疑似含 LPSYS/蓝牙 HCI 调试用途实例（参考 52 家族裁定：应用可用 UART=HPSYS 的 3 个），待原厂确认。
+- **I2C 总线卡死**保留 [[CR_I2C_BusStuck]]（通用规则，适用于 57 家族）。
+- **UART 调试接口（§15.4 p396）**：支持 UART 调试下载，详见调试章节。
+
+
 ## 关联页面
 - 家族：[[SF32LB57]]｜3.3V：[[SF32LB57X]]｜电池：[[SF32LB57x_batt|SF32LB57x]]
 - GPIO/复用：[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Pinmux]]
 - USB：[[SF32LB57_Peripheral_USB]]｜存储：[[SF32LB57_Peripheral_Memory]]
-- 来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+- 来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]、[[UM5701-SF32LB57x-用户手册_V0p1]]
 
 ## 原始来源完整引用
 1. [DS5702-SF32LB57X V0.2]，Table 3-1（P38）、§3.5.2 UART（P16）、§3.5.3 I2C（P17）、§3.5.6 SPI（P18）、§3.9 CAN（P38）。
 2. [DS5701-SF32LB57x V0.2]，同上（P38–39 等）。
+3. [UM5701-SF32LB57x-CN V0.1]，第 7 章 串行接口（印刷 p152–183）：USART1–4（§7.3 p174）、I2C1–4（§7.1 p152）、SPI1–2（§7.2 p164）、CAN1–2（§7.4 p183）、USB2.0 FS（§7.5 p183）。
 
 ## 待核实问题
-1. 各 UART / I2C / SPI / CAN 实例对应的 GPIO 复用引脚，待补 Pinmux / 用户手册。
+1. 各 UART / I2C / SPI / CAN 实例对应的 GPIO 复用引脚，UM §7 已给出实例编号（USART1–4 / I2C1–4 / SPI1–2 / CAN1–2），具体 GPIO 复用引脚待补 [[SF32LB57_Pinmux]]。
 2. I2C 上拉电阻推荐值本册未给出，禁止套用 SF32LB52 的 7.5kΩ，待官方参考设计。
 3. 是否存在仅用于调试（如蓝牙 HCI）而应用不可用的串口实例（SF32LB52 家族有此情况），本册未说明，待补用户手册。

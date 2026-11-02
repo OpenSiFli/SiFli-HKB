@@ -103,7 +103,7 @@ updated: 2026-09-09
 | PA56 | Y | Y | PD | TYPE1 | GPIO_A56 | — | #MICBIAS(F15) |
 | PA57 | — | Y | PD | TYPE1 | GPIO_A57 | — | — |
 
-> 注：QFN68 封装未引出的 PA = **PA21、PA45、PA46、PA47、PA48、PA49、PA50、PA51、PA52、PA53、PA54、PA57**（共 12 个 PA 仅存在于 QFN80/BGA112）；故 QFN68 = 46 GPIO，QFN80/BGA112 = 58 GPIO。
+> 注：QFN68 封装未引出的 PA = **PA21、PA45、PA46、PA47、PA48、PA49、PA50、PA51、PA52、PA53、PA54、PA57**（共 12 个 PA 仅存在于 QFN80/BGA112）；故本表（UM Table 5-1）推得 QFN68 = 46 GPIO，QFN80/BGA112 = 58 GPIO。⚠️ **以 DS Table 5-3 = 47 为准**（用户判定），本表「12 个未引出」与 DS 计数差 1，待原厂复核 pinmux 表。
 
 ## 4. Matrix Index（矩阵交叉开关信号表，160 个）
 
@@ -399,7 +399,7 @@ updated: 2026-09-09
 ## 6. 与规格书（DS5702 3.3V / DS5701 电池）差异 / 待核实
 
 1. **物理引脚号（Pin#）本表缺失**：pinmux xlsx 仅给 QFN68 / QFN80-BGA112 的 Y/N 引出标记，未列具体封装引脚号；物理 Pin# 须查规格书 Table 5-2（大核 GPIO）/ Table 5-3（专用管脚）。待补。
-2. **GPIO 数量**：本表 QFN68 = 46 GPIO（PA21、PA45–PA54、PA57 未引出）；规格书页 [[SF32LB57]] 标注 QFN68 = 47 GPIO，二者存在偏差，**以本 pinmux 表为准**，规格书 GPIO 计数待原厂复核（草稿 V0.2）。
+2. **GPIO 数量**：本表（UM Table 5-1）QFN68 = 46 GPIO（PA21、PA45–PA54、PA57 未引出）；规格书页 [[SF32LB57]] 标注 QFN68 = 47 GPIO（DS5702/DS5701 Table 5-3），二者存在偏差。按用户判定 **以 DS 为准 = 47**；本表「12 个未引出」与 DS 计数差 1，pinmux 表待原厂复核。
 3. **LPSYS / 小核 GPIO 缺失**：本 pinmux xlsx 仅含 HPSYS（大核 GPIO Group A），无 LPSYS/PBR 工作表；SF32LB57 为双大核架构，小核 GPIO 复用是否另行提供待用户手册确认。
 4. **MATRIX_DIOx 矩阵路由**：57 家族以矩阵交叉开关实现 I2C/UART/TIM/PWM 等通用分配（替代 52 家族固定 `PAxx_I2C_UART`/`PAxx_TIM` 列），具体矩阵信号见第 4 节。
 5. **专用复用外设命名差异（相对 52 家族）**：57 为 **MPI3**（非 MPI2）、**SD1/SD2**（双 SD 控制器）、**USART1**（单 Debug UART，PA18/PA19）、**无独立 PA_I2C_UART/PA_TIM 列**；禁止跨家族套用 52 家族引脚分配。

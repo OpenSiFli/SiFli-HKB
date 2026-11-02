@@ -3,13 +3,13 @@ title: SF32LB57x（电池供电系列）
 type: mcu_chip
 aliases: ["SF32LB57x 电池系列","SF32LB57x(电池供电)","SiFli SF32LB57x"]
 tags: ["企业MCU","芯片系列-SF32LB57","型号-SF32LB57x 电池系列","芯片实体","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+sources: [[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2.2],[SF32LB57X_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 mcu_series: ["电池供电系列"]
 mcu_model: ["SF32LB573UB7N6","SF32LB573UB766","SF32LB573UB776","SF32LB575UCNN6","SF32LB575UC7N6","SF32LB577UDNN6"]
-hardware_version: ["QFN68 7x7","Datasheet V0.2"]
+hardware_version: ["QFN68 7x7","QFN80 8x8","BGA112 5.4x4.4","Datasheet V0.2","Datasheet V0.2.2","UM V0.1"]
 created: 2026-09-09
-updated: 2026-09-09
+updated: 2026-11-02
 ---
 
 ## 摘要
@@ -17,11 +17,11 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
 
 > 同家族另有 **SF32LB57X（大写 X）= 3.3V 供电系列**（无充电、PVDD 主电），见 [[SF32LB57X]]；家族总览见 [[SF32LB57]]。
 >
-> 📌 **文档来源**：本系列由 **DS5701-SF32LB57x-CN**（标题小写 x）描述，与芯片命名一致。见 [[SF32LB57x_batt_Datasheet_V0.2_20260909]]。
+> 📌 **文档来源**：本系列由 **DS5701-SF32LB57x-CN**（标题小写 x）描述，与芯片命名一致。最新版见 [[SF32LB57x_batt_Datasheet_V0.2.2]]（V0.2.2）；历史版 [[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2）。
 >
 > 📌 **NTFS 说明**：本页文件名带 `_batt` 后缀（Windows 不区分大小写，`SF32LB57X.md` 与 `SF32LB57x.md` 会冲突）。引用请写 `[[SF32LB57x_batt|SF32LB57x]]`。
 >
-> ⚠️ **本系列规格书为 V0.2 草稿**，功耗参数全部 TBD，量产前须复核。
+> ⚠️ **本系列规格书为 V0.2.2 草稿**（2026-09-24，由 V0.2 演进，已补充功耗实测数据），草稿参数量产前仍须复核。
 
 ## 核心硬件内容
 
@@ -31,10 +31,10 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
   - HCPU：32KB(2-way) I$ + 16KB(4-way) D$；ACPU：16KB(2-way) I$ + 8KB(4-way) D$
   - LPSYS：Cortex-M33 STAR-MC1 @24MHz
 - 存储：片上 SRAM **592KB**（HPSYS 512KB + LPSYS 80KB，全部 Retention）；SiP 合封随料号（见 §订购信息）
-- 封装：**QFN68** 7×7mm（T0.9 / T1.1，P0.35）—— **订购信息（Table 6-1）仅列 QFN68 料号**；DS5701 已详述 QFN80/BGA112 管脚与封装尺寸，但 V0.2 中其料号缺失（规格书【严重】缺陷，见一致性核查报告），非硬件不支持。
+- 封装：**QFN68** 7×7mm（T0.9 / T1.1，P0.35）为当前订购信息（Table 6-1）所列；**QFN80(57xY)/BGA112(57xV) 封装 DS5701 第 5 章已完整给出（管脚/尺寸/最小系统），系列支持该两种封装**——仅 Table 6-1 暂未列出其料号（规格书订购表待补全，非芯片能力缺陷）。
 - 工作温度：‑40 ~ +85 °C
 - 无线：双模蓝牙 6.3（BLE Audio / LE LR）；BLE 灵敏度 ‑100dBm(1Mbps)；最大发射 17dBm(BR/BLE)、13dBm(EDR2/3)
-- 电源管理：内置高效率 Buck + 低功耗 LDO + **锂电充电模块**；休眠功耗 **2.8µA@3.8V**（特性页宣称，Table 4-6 全 TBD 待核实）
+- 电源管理：内置高效率 Buck + 低功耗 LDO + **锂电充电模块**；休眠 **Deepsleep 28µA**（V0.2.2 Table 4-6 实测@3.8V；特性页旧宣称 2.8µA@3.8V 与表不符）
 - **对外供电**：**VDD33_VOUT1(22)** 与 **VDD33_VOUT2(14)**，各 **150mA**
 
 ### 2. 专用引脚（Table 5-3，QFN68 = 57xUxxx6）
@@ -62,7 +62,7 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
 | 37 / 36 | DACP / DACN | A,O | 音频 DAC 输出 |
 | 69 | EPAD | GND | 散热裸焊盘，须接 GND |
 
-> **本系列无 PVDD / VDDIOA / VBATS / AVDD33 引脚**；GPIO IO 域由内部供给（无独立 VDDIOA 外部引脚）。
+> **QFN68 版本无 PVDD / VDDIOA / VBATS / AVDD33 外部引脚**（GPIO IO 域由 VSYS 内部供给）。⚠️ **QFN80/BGA112 版本（UM §3.1 Table 3-3）则有 VDDIOA（1.8/2.5/3.3V）、AVDD33(AVDD33_ANA)、VBATS(QFN80) 等外部引脚**——"无 VDDIOA" 仅限 QFN68，非全系列。
 
 ### 3. 与 3.3V 系列的引脚差异（同 QFN68）
 | 引脚 | 3.3V 系列 [[SF32LB57X]] | 电池系列（本页） |
@@ -75,21 +75,22 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
 | 24 | GPIO（非专用脚） | VCC（系统电源输入，接电池） |
 | 52 | AVDD_BRF（接 3.3V） | AVDD_BRF（**接 VSYS**） |
 
-### 4. 极限电气参数（Table 4-2）
+### 4. 极限电气参数（DS5701 V0.2.2 Table 4-2，PDF p38）
 - **VBUS**：最大 **5.5 V**
 - **VBAT**：最大 **4.7 V**；**VCC**：最大 **4.7 V**
-- PVDD：最大 3.63 V（本系列无此引脚）
 - 存储温度 Tstorage：‑40 ~ +125 °C
+- ⚠️ V0.2.2 起电池册 Table 4-2 **不再列 PVDD**（PVDD 为 3.3V 系列供电，见 [[SF32LB57X]]）；本系列仅 VBUS/VBAT/VCC。
 - ESD：**HBM ±4000V**（JS-001-2017）、**CDM ±1000V**（JS-002-2018）
 - Latch-up：I-Test ±200mA、OVT +1.5×VddMAX（JESD78E）
 - MSL：**MSL3**（回流 260+0°C 20s ×3）
 
-### 5. 推荐工作条件（Table 4-1）
+### 5. 推荐工作条件（DS5701 V0.2.2 Table 4-1，PDF p38）
 - **VBUS**：4.5 ~ 5 ~ 5.5 V（充电输入）
 - **VBAT**：3.0 ~ 4.7 V
 - **VCC**：3.0* ~ 4.7 V（* 开机电压 3.5V ±10%）
 - Tamb：‑40 ~ +85 °C
 - VIL ≤ 0.3×VIO；VIH ≥ 0.7×VIO；VTH ≈ 0.5×VIO
+- ⚠️ V0.2.2 电池册 Table 4-1 仅列 VBUS/VBAT/VCC（不再含 PVDD）。
 
 ### 6. 充电模块电气特性（Table 4-20）
 | 参数 | 符号 | Min | Typ | Max | 单位 |
@@ -145,16 +146,18 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
 
 ## 关联页面
 - 家族总览：[[SF32LB57]]｜3.3V 系列实体：[[SF32LB57X]]
-- 来源摘要：[[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+- 来源摘要：[[SF32LB57x_batt_Datasheet_V0.2.2]]（V0.2.2，最新）/ [[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）
 - 电源外设（差异权威页）：[[SF32LB57_Peripheral_Power]]
 - 其余外设：[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_Clock]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_BLE_RF]]、[[SF32LB57_Peripheral_Memory]]
 
 ## 原始来源完整引用
 1. [DS5701-SF32LB57x-芯片技术规格书-V0p2-20260909.pdf]，Raw：`raw/mcu/all_chip/datasheets/DS5701-SF32LB57x-芯片技术规格书-V0p2-20260909.pdf`，Table 4-1~4-3（P40）、Table 4-4~4-6（P41–42）、Table 4-20/4-21（P49）、Table 5-3（P62）、Table 6-1（P84）、最小系统图（P78–82）。
+2. [DS5701-SF32LB57x-芯片技术规格书-V0p2p2-20261102.pdf]（V0.2.2），Raw：`raw/mcu/all_chip/datasheets/DS5701-SF32LB57x-芯片技术规格书-V0p2p2-20261102.pdf`，85 页；相对 V0.2 新增功耗实测（Table 4-5/4-6）并精简 Table 4-1/4-2 为仅 VBUS/VBAT/VCC。
 
 ## 待核实问题
-1. **电池系列 GPIO 确切数量**未直接给出（3.3V QFN68 为 47 GPIO），待确认。
-2. **功耗参数全部 TBD**（Table 4-5/4-6），休眠/待机电流无法核算。
-3. **QFN80 / BGA112 封装**：DS5701 已详述其管脚与封装尺寸，但 Table 6-1 订购信息仅列 QFN68 料号（料号缺失为规格书【严重】缺陷，见一致性核查报告），非"后续提供"。
+1. **QFN68 GPIO 数已按 DS 闭环**：DS Table 5-3 标 QFN68 = **47 GPIO**（与 3.3V QFN68 相同）；UM Table 5-1 与 pinmux 显示 12 引脚未引出（PA21 + PA45–PA54 + PA57），与 DS 偏差，按用户判定 **以 DS 为准 = 47**。
+2. **功耗参数已于 V0.2.2 补充实测**（Table 4-5 处理器 @3.3V、Table 4-6 BT/BLE @3.8V，Deepsleep 28µA），休眠/待机电流可初步核算；草稿值量产前须复核（见 [[SF32LB57_Peripheral_Power]]）。
+3. **QFN80 / BGA112 封装**：DS5701 第 5 章已完整给出 57xY(80)/57xV(112) 的管脚分布、封装尺寸与最小系统（含 VDDIOA/AVDD33/VBATS 等外部引脚），即电池系列**支持**这两种封装；仅 Table 6-1 订购信息暂未列出对应料号（规格书订购表待补全，非芯片能力缺陷，亦非"后续提供"）。
 4. 最小系统原理图（P78–82）为矢量图，文本提取反序，关键网络（充电、VBUS 保护、VSYS 去耦）需人工核图。
-5. 尚无独立用户手册与硬件设计指南；BOOT/nRST 外部电路、PCB/EMC/ESD 规范缺失。
+5. 用户手册 UM5701 已导入（寄存器级，无硬件设计内容）；仍缺独立**硬件设计指南（HDG）/参考设计（RF 设计）**；BOOT/nRST 外部电路、PCB/EMC/ESD 规范缺失。
+6. **PA21 与 Hibernate 合封供电（封装依赖）**：UM §3.1 称由 PA21 控制外部电源开关防 hibernate 漏电，但 **PA21 在 QFN68 未引出**（UM Table 5-1），故本页 QFN68 须用 **PA11（MPI2_VDD_EN/SD_VDD_EN，默认 PU）** 替代；QFN80/BGA112 版本 PA21 可用。详见 [[DR_PA34_PowerKey_GPIO]] / [[CR_Hibernate_SiP_Supply]]（修正旧「PA21 仅 3.3V 有」口径，该口径原指 52 家族）。

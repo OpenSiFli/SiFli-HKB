@@ -76,8 +76,9 @@ updated: 2026-09-09
 ## 原始来源完整引用
 1. [DS5702-SF32LB57X V0.2]，Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2-20260909.pdf`，Table 4-1（P39 运行条件）、Table 4-2（P39 绝对最大值）、Table 4-3（P39 I/O @3.3V）、Table 4-4（P40 可靠性）、Table 4-20（P48 充电模块）。
 2. [DS5701-SF32LB57x V0.2]，Raw：`raw/mcu/all_chip/datasheets/DS5701-SF32LB57x-芯片技术规格书-V0p2-20260909.pdf`，同表（P40–41、P49）。
+3. [DS5702-SF32LB57X / DS5701-SF32LB57x V0.2.2]，Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2p2-20261102.pdf`、`raw/mcu/all_chip/datasheets/DS5701-SF32LB57x-芯片技术规格书-V0p2p2-20261102.pdf`；Table 4-1/4-2 精简、Table 4-5/4-6 新增功耗实测。
 
 ## 待核实问题
-- **Table 4-1/4-2 在两册中完全相同且同时含 VBUS/VBAT/VCC 与 PVDD**，但 3.3V 系列引脚表无 VBUS/VBAT/VCC。审图时**必须先判定系列，再只对该系列实际存在的引脚施加限值**。
+- **V0.2.2 起两册 Table 4-1/4-2 已按封装实际供电精简**：3.3V 册仅列 PVDD（3.63V），电池册仅列 VBUS(5.5V)/VBAT(4.7V)/VCC(4.7V)。审图时**必须先判定系列，再只对该系列实际存在的引脚施加限值**；裸 die 双供电能力见 UM §3.1/§3.2。
 - 规格书为 V0.2 草稿，限值可能变更；量产前须复核。
-- **功耗参数（Table 4-5/4-6）全部 TBD**，本规则暂不含电流/热预算校验，待补。
+- **功耗参数已在 V0.2.2 补充实测**（Table 4-5/4-6），本规则可据此增加电流/热预算校验（草稿值量产前须复核）。

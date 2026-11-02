@@ -3,7 +3,7 @@ title: SF32LB57 蓝牙射频（BT/BLE 6.3）
 type: mcu_peripheral
 aliases: ["SF32LB57_Peripheral_BLE_RF","SF32LB57 BLE","SF32LB57 射频","SF32LB57 BT"]
 tags: ["企业MCU","外设-无线/射频","芯片系列-SF32LB57","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 series_applicability: ["通用-两系列共用"]
 mcu_model: ["SF32LB57X","SF32LB57x"]
@@ -53,13 +53,13 @@ SF32LB57 集成**双模蓝牙 6.3** 收发机（支持 BLE Audio、LE LR）。**
 ## 关联页面
 - 家族：[[SF32LB57]]｜3.3V：[[SF32LB57X]]｜电池：[[SF32LB57x_batt|SF32LB57x]]
 - 电源：[[SF32LB57_Peripheral_Power]]｜时钟：[[SF32LB57_Peripheral_Clock]]
-- 来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+- 来源：[[SF32LB57X_Datasheet_V0.2.2]]、[[SF32LB57x_batt_Datasheet_V0.2.2]]（V0.2.2，最新）、[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）
 
 ## 原始来源完整引用
 1. [DS5702-SF32LB57X V0.2]，产品特性无线段（P4）、Table 4-6（P41）、Table 4-7~4-12（P41–44）、Table 4-13~4-17（P45–47）、Table 5-3（P61）、Table 5-4（P62）。
 2. [DS5701-SF32LB57x V0.2]，同上（P4 / P42–48 / P62）。
 
 ## 待核实问题
-1. **BT/BLE 功耗全部 TBD**（Table 4-6）。
+1. **BT/BLE 功耗已于 V0.2.2 补充实测**（DS5702 Table 4-6 @3.3V、DS5701 Table 4-6 @3.8V，Deepsleep 28µA），详见 [[SF32LB57_Peripheral_Power]] §8；草稿值量产前仍须复核。
 2. 天线匹配网络的具体元件值与布局（官方参考设计）本册未给出，待补。
 3. RF 输出功率与温度的降额关系未给出。

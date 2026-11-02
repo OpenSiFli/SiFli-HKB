@@ -3,7 +3,7 @@ title: SF32LB57 USB 2.0 Full-Speed
 type: mcu_peripheral
 aliases: ["SF32LB57_Peripheral_USB","SF32LB57 USB","SF32LB57 USB2.0"]
 tags: ["企业MCU","外设-USB","芯片系列-SF32LB57","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 series_applicability: ["通用-两系列共用"]
 mcu_model: ["SF32LB57X","SF32LB57x"]

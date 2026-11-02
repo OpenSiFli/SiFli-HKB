@@ -46,18 +46,18 @@ updated: 2026-09-09
 - 故障案例（4 条，`wiki/mcu/all/fault_case/` 下 `FC_*`）：I2C总线卡死 / 调试接口失效 / Hibernate合封漏电 / SDMMC-FIFO溢出（均来自用户手册 V0.8.8 衍生复盘）
 ### 已入库芯片型号（SF32LB57 家族 —— 含电池 / 3.3V 两个独立系列）
 > 57 家族同样含**两个独立系列，不能合并看待**：**SF32LB57X（大写 X）= 3.3V 供电系列**（无充电电路，主电 PVDD(19)，GPIO 由 VDDIOA(21) 供电）；**SF32LB57x（小写 x）= 电池供电系列**（内置充电模块，电源引脚 VBUS(21)/VBAT(20)/VCC(24)/VSYS(19)）。📌 文档标题大小写与芯片命名**一致**：3.3V 系列写在 **DS5702-SF32LB57X**（大写 X）、电池系列写在 **DS5701-SF32LB57x**（小写 x），与 52 家族规则相同。
-> ⚠️ **两份规格书均为 V0.2 草稿**（2026-09-09），`Table 4-5 处理器功耗` / `Table 4-6 BT/BLE 功耗` **全部 TBD**；两册电气表共用导致 VBUS/VBAT/VCC 与 PVDD 并存，**引脚归属以各册 Table 5-3 为准**。
+> ⚠️ **两份规格书均为 V0.2.2 草稿**（2026-09-24，由 V0.2 演进）：`Table 4-5 处理器功耗` / `Table 4-6 BT/BLE 功耗` **已于 V0.2.2 补充实测（不再 TBD）**；V0.2.2 起两册 Table 4-1/4-2 已按封装实际供电精简（3.3V 册仅 PVDD、电池册仅 VBUS/VBAT/VCC），**引脚归属以各册 Table 5-3 为准**。
 - [[SF32LB57]] —— 家族总览页（两系列导航 + 文档→系列映射 + 引脚差异对照表）
-- 3.3V 系列：[[SF32LB57X]]（芯片实体，来源 DS5702-SF32LB57X V0.2；封装 QFN68/QFN80/BGA112，46~58 GPIO（以 pinmux 表为准；规格书标 47 待核））
-  - 来源摘要：[[SF32LB57X_Datasheet_V0.2_20260909]]（DS5702-SF32LB57X-CN V0.2，84 页）
-- 电池系列：[[SF32LB57x_batt|SF32LB57x]]（芯片实体，来源 DS5701-SF32LB57x V0.2；**订购信息仅列 QFN68**——DS5701 已详述 QFN80/BGA112 但料号缺失，属规格书【严重】缺陷）
-  - 来源摘要：[[SF32LB57x_batt_Datasheet_V0.2_20260909]]（DS5701-SF32LB57x-CN V0.2，85 页）
+- 3.3V 系列：[[SF32LB57X]]（芯片实体，来源 DS5702-SF32LB57X V0.2.2；封装 QFN68/QFN80/BGA112，47~58 GPIO（以 DS Table 5-3 为准））
+  - 来源摘要：[[SF32LB57X_Datasheet_V0.2.2]]（DS5702-SF32LB57X-CN V0.2.2，84 页，最新）/ [[SF32LB57X_Datasheet_V0.2_20260909]]（V0.2，历史）
+- 电池系列：[[SF32LB57x_batt|SF32LB57x]]（芯片实体，来源 DS5701-SF32LB57x V0.2.2；**订购信息 Table 6-1 当前仅列 QFN68 料号，QFN80(57xY)/BGA112(57xV) 封装已在 DS5701 第 5 章完整给出、系列支持，仅订购表待补全**，非芯片能力缺陷）
+  - 来源摘要：[[SF32LB57x_batt_Datasheet_V0.2.2]]（DS5701-SF32LB57x-CN V0.2.2，85 页，最新）/ [[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）
   - 📌 电池系列页面文件名带 `_batt` 后缀（NTFS 不区分大小写，`SF32LB57X_*.md` 与 `SF32LB57x_*.md` 会冲突），引用写 `[[SF32LB57x_batt|SF32LB57x]]`
-- 外设专项（10 页，`wiki/mcu/all/peripheral/` 下 `SF32LB57_Peripheral_*`）：电源 / GPIO / 时钟 / GPADC / 音频 / 蓝牙射频 / 串口(UART-I2C-SPI-CAN) / 存储(MPI-SD-eMMC) / 定时器PWM / 显示与图形(ePicasso·LCD·DCMI·eZip)（两系列共用；**双系列电源引脚差异见 [[SF32LB57_Peripheral_Power]]**）
+- 外设专项（13 页，`wiki/mcu/all/peripheral/` 下 `SF32LB57_Peripheral_*`）：电源 / GPIO / 时钟 / GPADC / 音频 / 蓝牙射频 / 串口(UART-I2C-SPI-CAN) / 存储(MPI-SD-eMMC) / 定时器PWM / 显示与图形(ePicasso·LCD·DCMI·eZip) / USB / 温度传感器(TSEN) / 安全与加速(AES·SM4·HASH·CRC·TRNG·efusec·CORDIC)（两系列共用；**双系列电源引脚差异见 [[SF32LB57_Peripheral_Power]]**；TSEN 与 Security 两页由 UM5701 导入新增）
 - 引脚复用矩阵（PINMUX，1 页，`wiki/mcu/all/pinmux/SF32LB57_Pinmux.md`）：**已按官方 `pinmux - 202600901.xlsx` 逐行转录**——大核 GPIO Group A（PA00–PA57，QFN68=46 / QFN80·BGA112=58 GPIO）完整复用总表 + matrix index（160 交叉信号）+ LCD mux（IF_SEL/DPI）；电池与 3.3V 两系列共用同一套大核 GPIO 复用矩阵。原件已归档 `raw/mcu/all_chip/pinmux/`
 - 校验规则（2 条，`wiki/mcu/all/check_rules/` 下 `CR_SF32LB57_*`）：**双系列电源引脚匹配（致命）** / **绝对最大额定值与 IO 约束（严重）**
 - 通用（跨家族）校验规则（1 条）：[[CR_Audio_ADC_Input]]——**音频 ADC 输入要求**：单端/差分隔直电容（≥2.2µF）、输入范围随增益变化（单端 ±0.68V / 差分 ±1.35V @0dB，再除以增益）、IO 耐压 3.3V（绝对最大 3.63V）、信号地与芯片地共地；适用于**所有带音频 ADC 的思澈 MCU**（SF32LB52 / SF32LB57 已导入并适用）
-- 尚未导入：用户手册（UM）、硬件设计指南、官方 Checklist、参考设计原理图
+- 用户手册（UM）：**已导入 UM5701-SF32LB57x-CN V0.1**（双系列共用，见来源摘要 [[UM5701-SF32LB57x-用户手册_V0p1]]）；规格书已更新至 **DS5701/DS5702 V0.2.2（2026-09-24，补充功耗实测）**；尚未导入：硬件设计指南、官方 Checklist、参考设计原理图
 
 - AVL 合格物料库（SIFLI MCU **全系列通用**，`wiki/mcu/all/avl/` 下 `SIFLI_MCU_AVL_V0.4_20260812.md` + 6 个分类页）：SiFli 官方 **AVL 认证物料清单 V0.4（2026-08-12）**，覆盖**所有 SIFLI MCU 型号**（不限于 SF32LB52 系列）——分类含晶体 / Buck 电感 / Nor Flash / SPI Nand Flash / SD Nand Flash / LCD 驱动（TP 驱动当前为空）。原始 Excel 归档于 `raw/mcu/all_chip/avl/`，仅读取不修改；BOM 选型须从此表选取，优先级高于器件原厂规格书。
 

@@ -3,7 +3,7 @@ title: SF32LB57 存储接口（MPI / SD-SDIO-eMMC / SiP）
 type: mcu_peripheral
 aliases: ["SF32LB57_Peripheral_Memory","SF32LB57存储","SF32LB57 MPI","SF32LB57 SDMMC"]
 tags: ["企业MCU","外设-存储接口","芯片系列-SF32LB57","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 series_applicability: ["通用-两系列共用"]
 mcu_model: ["SF32LB57X","SF32LB57x"]
@@ -51,18 +51,25 @@ SF32LB57 存储资源：**3× MPI（QSPI）**、**2× SD/SDIO/eMMC**，支持 Si
 - SD/SDIO 的 CMD / D3 等信号在初始化阶段须有确定电平，**通常需要外部上拉**（具体阻值待补 57 家族参考设计）。
 - MPI 与 SDMMC 若复用同一组 IO，须确认不可同时启用（SF32LB52 家族存在 MPI2/SDMMC 互斥，57 家族待确认）。
 
+## 5. UM5701 V0.1 补充（寄存器级手册）
+- **存储接口实例（UM §14，印刷 p373–396）**：MPI1–3（§14.2 p384）、SD/SDIO/eMMC（SDMMC1–2，§14.1 p373）。3× MPI 复用矩阵中 MPI3 为通用分配（见 [[SF32LB57_Pinmux]] matrix index）。
+- **SDMMC 与 MPI2 互斥**：保留 [[CR_SDMMC_MPI2_Exclusive]]（通用规则）。
+- **外挂存储供电控制**：Hibernate 防漏电须由 PA21（QFN68 未引出→PA11）控电源开关，见 [[CR_Hibernate_SiP_Supply]]。
+
+
 ## 关联页面
 - 家族：[[SF32LB57]]｜3.3V：[[SF32LB57X]]｜电池：[[SF32LB57x_batt|SF32LB57x]]
 - GPIO/复用：[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Pinmux]]
-- 时钟：[[SF32LB57_Peripheral_Clock]]｜来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+- 时钟：[[SF32LB57_Peripheral_Clock]]｜来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]、[[UM5701-SF32LB57x-用户手册_V0p1]]
 
 ## 原始来源完整引用
 1. [DS5702-SF32LB57X V0.2]，Table 3-1（P38）、§3.8 存储接口（P26–27）、图 3-10 MPI 控制器框图（P26）、图 3-11 寄存器模式时序（P27）、最小系统图（P77，Boot 分支/存储类型）。
 2. [DS5701-SF32LB57x V0.2]，同上（P38–39 / P27 / P78–82）。
+3. [UM5701-SF32LB57x-CN V0.1]，第 14 章 存储接口（印刷 p373–396）：MPI1–3（§14.2 p384）、SD/SDIO/eMMC（SDMMC1–2，§14.1 p373）。
 
 ## 待核实问题
 1. **启动存储类型判别信号**（MEM_CFG0/1 或对应 GPIO）的权威说明待用户手册补入；最小系统图为矢量图，文本反序。
 2. **SD/SDIO/eMMC 上拉电阻**推荐值本册未给出，禁止套用 SF32LB52 的 7.5kΩ。
-3. MPI 与 SDMMC 是否存在 IO 复用互斥，待确认。
+3. MPI 与 SDMMC IO 复用互斥：UM §14 确认 MPI1–3 / SDMMC1–2 实例；具体 IO 互斥（如 52 家族 MPI2/SDMMC）保留 [[CR_SDMMC_MPI2_Exclusive]]，57 家族须以 Pinmux 矩阵为准。
 4. 各 MPI / SDMMC 实例对应 GPIO 复用引脚，待补 Pinmux。
-5. 外挂存储在低功耗（hibernate/standby）下的供电控制策略与对应 GPIO，待补参考设计。
+5. 外挂存储低功耗（hibernate/standby）供电控制：UM §3.1/§3.2 称由 PA21 控外部电源开关；QFN68 未引出 → 改用 PA11（默认 PU），见 [[CR_Hibernate_SiP_Supply]]（封装依赖非系列依赖）。
