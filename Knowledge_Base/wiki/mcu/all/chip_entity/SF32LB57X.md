@@ -135,6 +135,7 @@ SiFli **SF32LB57X（大写 X）= 3.3V 供电系列**，超低功耗多核双系�
 ## 关联页面
 - 家族总览：[[SF32LB57]]｜电池系列实体：[[SF32LB57x_batt|SF32LB57x]]
 - 来源摘要：[[SF32LB57X_Datasheet_V0.2.2]]（V0.2.2，最新）/ [[SF32LB57X_Datasheet_V0.2_20260909]]（V0.2，历史）
+- 硬件设计指南（全系列 3.3V + 电池共用）：[[SF32LB57_Hardware_Design_Guide]]
 - 外设：[[SF32LB57_Peripheral_Power]]、[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_Clock]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_BLE_RF]]、[[SF32LB57_Peripheral_Serial]]、[[SF32LB57_Peripheral_Memory]]、[[SF32LB57_Peripheral_Timer_PWM]]、[[SF32LB57_Peripheral_Display]]、[[SF32LB57_Peripheral_USB]]
 
 ## 原始来源完整引用
@@ -146,5 +147,5 @@ SiFli **SF32LB57X（大写 X）= 3.3V 供电系列**，超低功耗多核双系�
 2. **Table 4-20 充电模块电气特性出现在本册**属正常（die 共用内置功能），非误植；本系列封装未引出 VBUS/VBAT，无需连接。
 3. **功耗参数已于 V0.2.2 补充实测**（Table 4-5 处理器 @3.8V、Table 4-6 BT/BLE @3.3V，Deepsleep 28µA），低功耗预算可初步核算；草稿值量产前须复核（见 [[SF32LB57_Peripheral_Power]]）。
 4. ~~`SF32BPRTUN3N6` 料号疑误~~ → 已确认 `SF32BPRTUN3N6` ≡ `SF32LB57ZUN3N6`（同配置的特殊/替代订货型号，非笔误），本条闭环。
-5. 复位 / BOOT 外部电路、PCB 布局与 EMC/ESD 规范缺失——用户手册 UM5701 已导入（寄存器级，无上述硬件设计内容），仍待补 SiFli **硬件设计指南（HDG）/参考设计（RF 设计）**。
+5. 硬件设计指南（HDG）**已导入**（见 [[SF32LB57_Hardware_Design_Guide]]，全系列 3.3V/电池共用）；仍缺参考设计（RF 设计）/复位·BOOT 外部电路、PCB 布局与 EMC/ESD 规范（用户手册 UM5701 已导入但为寄存器级，无上述硬件设计内容）。
 6. **QFN68 GPIO 数已按 DS 闭环**：DS Table 5-3 标 47；UM Table 5-1 与 pinmux 显示 12 引脚未引出（PA21 + PA45–PA54 + PA57），与 DS 偏差，按用户判定 **以 DS 为准 = 47**。

@@ -70,6 +70,8 @@ updated: 2026-08-12
 
 2026-11-02 | **V0.2.2 导入复核与修正**（用户指出此前为差异比对式导入、未通读全文）｜①SF32BPRTUN3N6 误判为「命名笔误」已撤销：用户确认其与 SF32LB57ZUN3N6 整行完全一致（同 QFN68/8Mb NOR/3.3V/3000），为同一器件特殊/替代订货型号，非笔误；已清除 3.3V 来源页/3.3V 实体页/历史 V0.2 来源页/UM5701 来源页中的「命名疑误」标记。｜②撤销电池系列 QFN80/BGA112「【严重】缺陷」误判：电池 DS5701 第 5 章已完整给出 57xY(80)/57xV(112) 管脚图/封装尺寸/最小系统，系列支持该两种封装；仅 Table 6-1 订购信息暂未列其料号（规格书订购表待补全，非芯片能力缺陷）；3.3V DS5702 Table 6-1 已含 QFN80×2/BGA112×1；已修正 SF32LB57.md/SF32LB57x_batt.md/GPIO 外设页/两 V0.2.2 来源页/两 V0.2 来源页/UM5701/index 中的「【严重】缺陷」措辞。｜③修正 3.3V 系列 BT/BLE 功耗实测值抄串：此前误将电池系列 @3.8V 值（170.5/178.5/212.3、134.3/161.5/263.4）填入 3.3V 系列，已按 V0.2.2 Table 4-6 @3.3V 原文更正为 177.9/193.7/226.6、116.8/178.6/293.8 等（SF32LB57X_Datasheet_V0.2.2 + SF32LB57_Peripheral_Power §8，拆为两系列独立表）。｜④全面复核：通读两册 V0.2.2 全文并对 V0.2 做正文级 diff，确认 V0.2.2 相对 V0.2 的实质改动仅「功耗实测 + Table 4-1/4-2 按封装精简」两项，订购型号未变；知识库其余章节（来自 V0.2 + UM5701）已覆盖 V0.2.2 全部内容，本次仅补上述三项修正。
 
+2026-11-03 | **导入 SF32LB57 硬件设计指南（全系列）**｜源：`D:/Github/SiFli-Wiki/source/zh_CN/hardware/SF32LB57x-HW-Application.md`（SiFli Wiki，源文件未改动）；落库：`wiki/mcu/all/hardware_design_guide/SF32LB57_Hardware_Design_Guide.md`（doc_type: hardware_design_guide，mcu_family SF32LB57，3.3V 与电池两系列共用）。转换器将 MyST 指令 `{note}`×21 / `{important}`×3 转为 Obsidian callout、`{table}`×52 转为纯 md 表格、`<img>`×74 转为 `![[raw/mcu/all_chip/hw_design/images/57x/X]]` 嵌入；76 张图（png+svg）复制至 `raw/mcu/all_chip/hw_design/images/57x/`（去重后 74 张被引用）。指南约 2.1k 行，覆盖芯片介绍（命名·封装·Pinout）/ 原理图设计（电源·时钟·存储·射频·GPIO·多媒体·通用接口·调试下载·产线·最小系统）/ PCB 设计（叠层·电源·时钟·射频·模拟·高速·EMI&ESD）/ 设计自查全章节。｜双链闭环：三实体页（SF32LB57 / SF32LB57X / SF32LB57x_batt）关联页面加 HDG 回链 + 待核实「HDG 缺失」条目闭环；index 57 段补 HDG 行并将「尚未导入」收窄为仅 Checklist/参考设计；HDG 页追加关联页面。｜仍缺：官方 Checklist、参考设计原理图（RF 设计）。
+
 ## 使用说明
 - 每次入库/更新后，在上方「变更记录」末尾追加一行。
 - 人工待确认事项：记录参数冲突、缺失资料、待核实芯片范围等事项，后续闭环后追加备注。

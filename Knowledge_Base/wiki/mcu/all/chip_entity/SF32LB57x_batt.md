@@ -147,6 +147,7 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
 ## 关联页面
 - 家族总览：[[SF32LB57]]｜3.3V 系列实体：[[SF32LB57X]]
 - 来源摘要：[[SF32LB57x_batt_Datasheet_V0.2.2]]（V0.2.2，最新）/ [[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）
+- 硬件设计指南（全系列 3.3V + 电池共用）：[[SF32LB57_Hardware_Design_Guide]]
 - 电源外设（差异权威页）：[[SF32LB57_Peripheral_Power]]
 - 其余外设：[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_Clock]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_BLE_RF]]、[[SF32LB57_Peripheral_Memory]]
 
@@ -159,5 +160,5 @@ SiFli **SF32LB57x（小写 x）= 电池供电系列**，超低功耗多核双系
 2. **功耗参数已于 V0.2.2 补充实测**（Table 4-5 处理器 @3.3V、Table 4-6 BT/BLE @3.8V，Deepsleep 28µA），休眠/待机电流可初步核算；草稿值量产前须复核（见 [[SF32LB57_Peripheral_Power]]）。
 3. **QFN80 / BGA112 封装**：DS5701 第 5 章已完整给出 57xY(80)/57xV(112) 的管脚分布、封装尺寸与最小系统（含 VDDIOA/AVDD33/VBATS 等外部引脚），即电池系列**支持**这两种封装；仅 Table 6-1 订购信息暂未列出对应料号（规格书订购表待补全，非芯片能力缺陷，亦非"后续提供"）。
 4. 最小系统原理图（P78–82）为矢量图，文本提取反序，关键网络（充电、VBUS 保护、VSYS 去耦）需人工核图。
-5. 用户手册 UM5701 已导入（寄存器级，无硬件设计内容）；仍缺独立**硬件设计指南（HDG）/参考设计（RF 设计）**；BOOT/nRST 外部电路、PCB/EMC/ESD 规范缺失。
+5. 用户手册 UM5701 已导入（寄存器级，无硬件设计内容）；硬件设计指南（HDG）**已导入**（见 [[SF32LB57_Hardware_Design_Guide]]，全系列共用）；仍缺参考设计（RF 设计）/BOOT·nRST 外部电路、PCB·EMC·ESD 规范。
 6. **PA21 与 Hibernate 合封供电（封装依赖）**：UM §3.1 称由 PA21 控制外部电源开关防 hibernate 漏电，但 **PA21 在 QFN68 未引出**（UM Table 5-1），故本页 QFN68 须用 **PA11（MPI2_VDD_EN/SD_VDD_EN，默认 PU）** 替代；QFN80/BGA112 版本 PA21 可用。详见 [[DR_PA34_PowerKey_GPIO]] / [[CR_Hibernate_SiP_Supply]]（修正旧「PA21 仅 3.3V 有」口径，该口径原指 52 家族）。

@@ -57,7 +57,8 @@ updated: 2026-09-09
 - 引脚复用矩阵（PINMUX，1 页，`wiki/mcu/all/pinmux/SF32LB57_Pinmux.md`）：**已按官方 `pinmux - 202600901.xlsx` 逐行转录**——大核 GPIO Group A（PA00–PA57，QFN68=46 / QFN80·BGA112=58 GPIO）完整复用总表 + matrix index（160 交叉信号）+ LCD mux（IF_SEL/DPI）；电池与 3.3V 两系列共用同一套大核 GPIO 复用矩阵。原件已归档 `raw/mcu/all_chip/pinmux/`
 - 校验规则（2 条，`wiki/mcu/all/check_rules/` 下 `CR_SF32LB57_*`）：**双系列电源引脚匹配（致命）** / **绝对最大额定值与 IO 约束（严重）**
 - 通用（跨家族）校验规则（1 条）：[[CR_Audio_ADC_Input]]——**音频 ADC 输入要求**：单端/差分隔直电容（≥2.2µF）、输入范围随增益变化（单端 ±0.68V / 差分 ±1.35V @0dB，再除以增益）、IO 耐压 3.3V（绝对最大 3.63V）、信号地与芯片地共地；适用于**所有带音频 ADC 的思澈 MCU**（SF32LB52 / SF32LB57 已导入并适用）
-- 用户手册（UM）：**已导入 UM5701-SF32LB57x-CN V0.1**（双系列共用，见来源摘要 [[UM5701-SF32LB57x-用户手册_V0p1]]）；规格书已更新至 **DS5701/DS5702 V0.2.2（2026-09-24，补充功耗实测）**；尚未导入：硬件设计指南、官方 Checklist、参考设计原理图
+- 硬件设计指南（Hardware Design Guide，全系列 1 份，`wiki/mcu/all/hardware_design_guide/SF32LB57_Hardware_Design_Guide.md`）：SiFli 官方 wiki 硬件设计指南，**3.3V 供电系列（SF32LB57X）与 电池供电系列（SF32LB57x）共用**，含芯片基本介绍（命名·封装·Pinout）/ 原理图设计（电源·时钟·存储·射频·GPIO·多媒体·通用接口·调试下载·产线·最小系统）/ PCB 设计（叠层·电源·时钟·射频·模拟·高速·EMI&ESD）/ 设计自查全章节，74 张图已本地化至 `raw/mcu/all_chip/hw_design/images/57x/`
+- 用户手册（UM）：**已导入 UM5701-SF32LB57x-CN V0.1**（双系列共用，见来源摘要 [[UM5701-SF32LB57x-用户手册_V0p1]]）；规格书已更新至 **DS5701/DS5702 V0.2.2（2026-09-24，补充功耗实测）**；尚未导入：官方 Checklist、参考设计原理图
 
 - AVL 合格物料库（SIFLI MCU **全系列通用**，`wiki/mcu/all/avl/` 下 `SIFLI_MCU_AVL_V0.4_20260812.md` + 6 个分类页）：SiFli 官方 **AVL 认证物料清单 V0.4（2026-08-12）**，覆盖**所有 SIFLI MCU 型号**（不限于 SF32LB52 系列）——分类含晶体 / Buck 电感 / Nor Flash / SPI Nand Flash / SD Nand Flash / LCD 驱动（TP 驱动当前为空）。原始 Excel 归档于 `raw/mcu/all_chip/avl/`，仅读取不修改；BOM 选型须从此表选取，优先级高于器件原厂规格书。
 
