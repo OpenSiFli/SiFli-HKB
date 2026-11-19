@@ -49,14 +49,14 @@ SF32LB57 家族**两系列（3.3V / 电池）的电源专用引脚定义完全�
    - 先确认料号与系列（见 [[SF32LB57]] §订购信息 / 两份规格书 Table 6-1）；
    - 按 [[SF32LB57_Peripheral_Power]] §1 对照表逐脚核对并修正；
    - 电池系列：VCC(24) 与 VBAT(20) 接电池，VBUS(21) 接充电输入，VSYS(19) 外挂电容到地，AVDD_BRF(52) 接 VSYS；
-   - 3.3V 系列：PVDD(19) 接 3.3V，VDDIOA(21) 供 GPIO，AVDD33(14)/AVDD33_AUD(38)/AVDD_BRF(52) 接 3.3V，pin22 悬空。
+   - 3.3V 系列：PVDD(19) 接 3.3V，VDDIOA(21) 供 GPIO（**DS V0.2.3 明确可接 1.8V 或 3.3V**：QFN68 pin21 / QFN80 pin4 / BGA112 H4），AVDD33(14)/AVDD33_AUD(38)/AVDD_BRF(52) 接 3.3V，pin22 悬空。
 
 5. **知识库溯源依据**：[[SF32LB57_Peripheral_Power]]；[[SF32LB57X]] §2；[[SF32LB57x_batt]] §2；DS5702 Table 5-3（P61）；DS5701 Table 5-3（P62）。
 
 ## 关联页面
 - 家族：[[SF32LB57]]｜3.3V：[[SF32LB57X]]｜电池：[[SF32LB57x_batt|SF32LB57x]]
-- 电源外设：[[SF32LB57_Peripheral_Power]]｜绝对最大额定值：[[CR_SF32LB57_AbsMaxRatings]]
-- 来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+- 电源外设：[[SF32LB57_Peripheral_Power]]｜绝对最大额定值：[[CR_SF32LB57_AbsMaxRatings]]｜VDD_VOUT1 电容（10µF/6.3V）：[[CR_SF32LB57_VDD_VOUT1_Capacitor]]
+- 来源：[[SF32LB57X_Datasheet_V0.2.3]]、[[SF32LB57x_batt_Datasheet_V0.2.3]]（V0.2.3，最新）、[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）
 - 方法学参照（52 家族）：[[CR_PowerDomains]]
 
 ## 原始来源完整引用

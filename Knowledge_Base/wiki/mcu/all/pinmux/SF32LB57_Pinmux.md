@@ -404,12 +404,13 @@ updated: 2026-09-09
 4. **MATRIX_DIOx 矩阵路由**：57 家族以矩阵交叉开关实现 I2C/UART/TIM/PWM 等通用分配（替代 52 家族固定 `PAxx_I2C_UART`/`PAxx_TIM` 列），具体矩阵信号见第 4 节。
 5. **专用复用外设命名差异（相对 52 家族）**：57 为 **MPI3**（非 MPI2）、**SD1/SD2**（双 SD 控制器）、**USART1**（单 Debug UART，PA18/PA19）、**无独立 PA_I2C_UART/PA_TIM 列**；禁止跨家族套用 52 家族引脚分配。
 6. **PA34 电源键（PWRKEY）**：PA34 在 57 家族同样带 PWRKEY（开关机）硬件功能，本表 PA34 行未列 PWRKEY 复用名（属纯硬件功能）。与 52 不同，**57 可将 PA34 的 PWRKEY 功能经 PMUC WER.PWRKEY = 0 关闭**，关闭后即可完全当作普通 GPIO、无高电平保持时长限制；关闭前长按高电平仍触发复位。详见 [[DR_PA34_PowerKey_GPIO]]。
+7. **SWD 调试引脚（V0.2.3 规格书已对本表口径）**：DS V0.2.2 曾标 PA18=SWDIO/PA19=SWCLK，V0.2.3 已对调为 **PA18=SWCLK(F2) / PA19=SWDIO(F2)**，与本表（pinmux xlsx）一致。注意 **57 家族口径与 52 家族相反**（52 为 PA18=SWDIO/PA19=SWCLK），禁止跨家族套用；详见 [[SF32LB57X_Datasheet_V0.2.3]]。
 
 ## 关联页面
 - 家族：[[SF32LB57]]｜3.3V：[[SF32LB57X]]｜电池：[[SF32LB57x_batt|SF32LB57x]]
 - GPIO：[[SF32LB57_Peripheral_GPIO]]｜电源：[[SF32LB57_Peripheral_Power]]｜存储：[[SF32LB57_Peripheral_Memory]]｜串口：[[SF32LB57_Peripheral_Serial]]
 - 52 家族对照：[[SF32LB52_Pinmux]]
-- 来源：[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]
+- 来源：[[SF32LB57X_Datasheet_V0.2.3]]、[[SF32LB57x_batt_Datasheet_V0.2.3]]（V0.2.3，最新）、[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）
 
 ## 原始来源完整引用
 1. [pinmux - 202600901.xlsx]，Raw：`raw/mcu/all_chip/pinmux/pinmux - 202600901.xlsx`（原件 `E:/Work/Package/ButterFli-Micro-S/pinmux/pinmux - 202600901.xlsx` 仅复制未移动）。

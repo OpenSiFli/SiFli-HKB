@@ -31,8 +31,16 @@ updated: 2026-08-12
 - 来源摘要库：`wiki/dev_board/all/sources/`
 - 图纸提取库：`wiki/dev_board/all/schematics/`（原理图/PCB/BOM/GPIO 结构化提取）
 
-### 已入库开发板（待首次建板后在此登记）
-- （暂无，待执行 `cmd/新增开发板入库指令.md` 后填充）
+### 已入库开发板
+- **SF32LB57-DevKit-LCD**（LCD 多媒体 AIoT 评估/开发板，模组 SF32LB57-MOD-WD / 芯片 SF32LB57X 3.3V 系列）
+  - 板卡实体：[[SF32LB57-DevKit-LCD]]
+  - 使用指南来源页：[[SF32LB57-DevKit-LCD_UserGuide]]（原始 `raw/dev_board/guide/SF32LB57-DevKit-LCD.md`；2026-11-19 按源站最新版全量重建：14 图 / 9 表 / 3 提示框，含模组 72 脚及 40P/24P 接口完整逐脚表、DPI-RGB 与 QSPI 显示排线说明，WS2812B V1.1 为 PA_08）
+  - 平台/芯片：[[SF32LB57X]]（3.3V 系列，QFN80）、[[SF32LB57]]
+  - 底板图纸提取页（V1.1）：[[SF32LB57-DevKit-LCD_SCH_V1_1]]（电源树/复位/时钟/BOOT/调试/存储/显示/摄像头/音频/无线/IO 扩展器/LED/40P 排针 + 整板 GPIO 分配）
+  - 模组图纸+BOM 提取页：[[SF32LB57-MOD-WD_SCH_2026-08-26]]（MOD-WD 模组；N16R8/R16N16 双变体，共用兼容 PCB、靠焊接区分）
+  - IO 配置表（raw）：[[raw/dev_board/gpio_table/57x LCD-DevKit ioconfig-11022026.xlsx]]
+  - 模组 BOM（raw，双变体）：[[raw/dev_board/bom/BOM_SF32LB57-MOD-WD-N16R8_2026-08-26.xlsx]]、[[raw/dev_board/bom/BOM_SF32LB57-MOD-WD-R16N16_2026-10-21.xlsx]]
+  - PCB：未提供（待补）
 
 ---
 

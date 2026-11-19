@@ -12,7 +12,7 @@ module_model: ["SF32LB57-MOD-WD（N16R8 / R16N16 两变体，共用兼容 PCB、
 mounting_type: ["模组"]
 storage_config: ["模组 N16R8：外置 16MB QSPI-NOR Flash（U2 PY25Q128HA，WSON-8，MPI3 接口）+ MCU 内置 8MB PSRAM", "模组 R16N16：MCU 内置 16MB NOR + 16MB PSRAM（无外置 U2）", "两变体共用兼容 PCB，靠焊接 BOM 区分（详见 [[SF32LB57-MOD-WD_SCH_2026-08-26]]）", "板载 TF 卡座 J6（1bit SDIO）"]
 power_supply: ["USB Type-C 5V 供电", "主 3.3V：ETA3425D2G Buck(U4) → VDD_3V3", "Wi-Fi 3.3V：ETA3425D2G Buck(U7) → WF_3V3（由 IOEX_WF_PWREN 控制）"]
-peripherals: ["DPI-RGB888 显示(FPC1 40P 0.5mm)", "DCMI DVP 摄像头(FPC4 24P 0.5mm)", "音频 NS4150B Class-D + 双 PDM 麦克风", "USB2.0 FS(PA35/PA36)", "USB-to-UART(CH343P)", "TF 卡 SDIO", "Wi-Fi/BT Combo(AIC8800D40LS-N, SDIO)", "40P 树莓派兼容排针 J3", "3 路 GPADC 按键(PA34)", "3 LED(AW9523B) + WS2812B(PA11)", "IO 扩展器 AW9523BTOR(U11)"]
+peripherals: ["DPI-RGB888 显示(FPC1 40P 0.5mm)", "DCMI DVP 摄像头(FPC4 24P 0.5mm)", "音频 NS4150B Class-D + 双 PDM 麦克风", "USB2.0 FS(PA35/PA36)", "USB-to-UART(CH343P)", "TF 卡 SDIO", "Wi-Fi/BT Combo(AIC8800D40LS-N, SDIO)", "40P 树莓派兼容排针 J3", "3 路 GPADC 按键(PA34)", "3 LED(AW9523B) + WS2812B(PA_08，V1.1；V1.0 为 PA_11)", "IO 扩展器 AW9523BTOR(U11)"]
 debug_interface: ["USB-to-UART(CH343P，推荐下载/调试)", "SWD(SWDIO PA44 / SWCLK PA43)"]
 use_cases: ["智能 HMI", "可视对讲", "智能穿戴", "多媒体 AIoT 评估与研发调试"]
 guide_doc: [[SF32LB57-DevKit-LCD_UserGuide]]
@@ -61,7 +61,7 @@ SF32LB57-DevKit-LCD 是基于 **SF32LB57-MOD-WD 模组**（搭载 **SF32LB57X** 
 - **音频**：24-bit DAC → NS4150B Class-D 功放（U8）驱动扬声器（J7 MX1.25-2P，默认 8Ω）；双 PDM 麦克风（MIC1/MIC2，PA_56 PDM_CLK / PA_55 PDM_DAT，由 IOEX_PDM_PWREN 控制）；规范见 [[SF32LB57_Peripheral_Audio]]
 - **USB**：USB2.0 FS（PA35/PA36，直连芯片）；USB-to-UART（CH343P，下载/调试）；规范见 [[SF32LB57_Peripheral_USB]]
 - **无线**：模组内 AIC8800D40LS-N Wi-Fi/BT Combo（SDIO），IPEX-1 天线座；规范见 [[SF32LB57_Peripheral_BLE_RF]]
-- **通用 IO / 扩展**：40P 树莓派兼容排针 J3（引出 GPIO/I2C/SPI/UART/SWD）；3 路 GPADC 按键（KEY-1/2/3，共用 PA_34）；3 用户 LED（红/绿/蓝，AW9523B P1_1~P1_3）+ WS2812B（PA_11）；规范见 [[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Timer_PWM]]
+- **通用 IO / 扩展**：40P 树莓派兼容排针 J3（引出 GPIO/I2C/SPI/UART/SWD）；3 路 GPADC 按键（KEY-1/2/3，共用 PA_34）；3 用户 LED（红/绿/蓝，AW9523B P1_1~P1_3）+ WS2812B（PA_08，V1.1；V1.0 为 PA_11）；规范见 [[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Timer_PWM]]
 - **调试与下载**：见 §八
 
 ## 八、调试接口

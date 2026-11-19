@@ -17,9 +17,9 @@ SiFli **SF32LB57X（大写 X）= 3.3V 供电系列**，超低功耗多核双系�
 
 > 同家族另有 **SF32LB57x（小写 x）= 电池供电系列**（内置充电模块、VBUS/VBAT/VCC/VSYS），见 [[SF32LB57x_batt|SF32LB57x]]；家族总览见 [[SF32LB57]]。
 >
-> 📌 **文档来源**：本系列由 **DS5702-SF32LB57X-CN**（标题大写 X）描述，与芯片命名一致。最新版见 [[SF32LB57X_Datasheet_V0.2.2]]（V0.2.2）；历史版 [[SF32LB57X_Datasheet_V0.2_20260909]]（V0.2）。
+> 📌 **文档来源**：本系列由 **DS5702-SF32LB57X-CN**（标题大写 X）描述，与芯片命名一致。最新版见 [[SF32LB57X_Datasheet_V0.2.3]]（V0.2.3）；历史版 [[SF32LB57X_Datasheet_V0.2.2]]（V0.2.2）、[[SF32LB57X_Datasheet_V0.2_20260909]]（V0.2）。
 >
-> ⚠️ **本系列规格书为 V0.2.2 草稿**（2026-09-24，由 V0.2 演进，已补充功耗实测数据），草稿参数量产前仍须复核。
+> ⚠️ **本系列规格书为 V0.2.3 草稿**（2026-11-19，由 V0.2.2 演进，修正处理器功耗表/SWD 引脚/订购信息等，详见 [[SF32LB57X_Datasheet_V0.2.3]]），草稿参数量产前仍须复核。
 
 ## 核心硬件内容
 
@@ -30,14 +30,14 @@ SiFli **SF32LB57X（大写 X）= 3.3V 供电系列**，超低功耗多核双系�
   - ACPU：16KB(2-way) I$ + 8KB(4-way) D$
   - LPSYS：Cortex-M33 STAR-MC1 @24MHz
 - 存储：片上 SRAM **592KB**（HPSYS 512KB + LPSYS 80KB，全部 Retention）；SiP 合封随料号（见 §订购信息）
-- FPU（单精度）、MPU；功耗效率 23µA/MHz @3.8V
+- FPU（单精度）、MPU；功耗效率 **26µA/MHz @3.3V**（V0.2.3；V0.2.2 旧值 23µA/MHz@3.8V）
 - 封装与 GPIO：
   - **QFN68** 7×7mm（T0.9 / T1.1，P0.35）— 3.3V 供电，**47 GPIO**（以 DS Table 5-3 为准；UM Table 5-1 / pinmux 显示 12 引脚未引出，与 DS 偏差，按 DS 为准）
   - **QFN80** 8×8mm（T0.9 / T1.1，P0.35）— 3.3V 供电，**58 GPIO**
   - **BGA112** 5.4×4.4mm（T0.98，P0.4）— 3.3V 供电，**最多 58 GPIO + 6 GPO MPI IO**
 - 工作温度：‑40 ~ +85 °C
 - 无线：双模蓝牙 6.3（BLE Audio / LE LR）；BLE 灵敏度 ‑100dBm(1Mbps)；最大发射 17dBm(BR/BLE)、13dBm(EDR2/3)
-- 电源管理：内置高效率 Buck + 低功耗 LDO；**提供两路对外 3.3V 供电，每路最大 150mA**；休眠 **Deepsleep 28µA**（V0.2.2 Table 4-6 实测；特性页旧宣称 1µA@3.3V 与表不符）
+- 电源管理：内置高效率 Buck + 低功耗 LDO；**提供两路对外 3.3V 供电，每路最大 150mA**；休眠 **Deepsleep 28µA**（Table 4-6 实测；特性页旧宣称 1µA@3.3V 与表不符）。**处理器功耗 V0.2.3 起 @3.3V（240MHz 11554µA、关机 1.0µA），V0.2.2 旧值 @3.8V 已作废，见 [[SF32LB57_Peripheral_Power]] §8**
 - **无锂电充电电路**（主电由外部 PVDD 提供；VBATS 仅作电池电压检测）
 
 ### 2. 专用引脚（Table 5-3，QFN68 = 57XUxxx6）
@@ -134,18 +134,20 @@ SiFli **SF32LB57X（大写 X）= 3.3V 供电系列**，超低功耗多核双系�
 
 ## 关联页面
 - 家族总览：[[SF32LB57]]｜电池系列实体：[[SF32LB57x_batt|SF32LB57x]]
-- 来源摘要：[[SF32LB57X_Datasheet_V0.2.2]]（V0.2.2，最新）/ [[SF32LB57X_Datasheet_V0.2_20260909]]（V0.2，历史）
+- 来源摘要：[[SF32LB57X_Datasheet_V0.2.3]]（V0.2.3，最新）/ [[SF32LB57X_Datasheet_V0.2.2]]（V0.2.2，历史）/ [[SF32LB57X_Datasheet_V0.2_20260909]]（V0.2，历史）
 - 硬件设计指南（全系列 3.3V + 电池共用）：[[SF32LB57_Hardware_Design_Guide]]
 - 外设：[[SF32LB57_Peripheral_Power]]、[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_Clock]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_BLE_RF]]、[[SF32LB57_Peripheral_Serial]]、[[SF32LB57_Peripheral_Memory]]、[[SF32LB57_Peripheral_Timer_PWM]]、[[SF32LB57_Peripheral_Display]]、[[SF32LB57_Peripheral_USB]]
 
 ## 原始来源完整引用
 1. [DS5702-SF32LB57X-芯片技术规格书-V0p2-20260909.pdf]，Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2-20260909.pdf`，Table 4-1~4-3（P39）、Table 4-4~4-6（P40–41）、Table 4-18~4-21（P47–48）、Table 3-1（P38）、Table 5-3（P61）、Table 5-4（P62）、Table 6-1（P83）、最小系统图（P77）。
 2. [DS5702-SF32LB57X-芯片技术规格书-V0p2p2-20261102.pdf]（V0.2.2），Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2p2-20261102.pdf`，84 页；相对 V0.2 新增功耗实测（Table 4-5/4-6）并精简 Table 4-1/4-2 为仅 PVDD。
+3. [DS5702-SF32LB57X-芯片技术规格书-V0p2p3-20261119.pdf]（V0.2.3），Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2p3-20261119.pdf`，84 页；Table 4-5 处理器功耗改 @3.3V（两册对调）、SWD 引脚 PA18/PA19 对调、VDDIOA 说明补充 1.8V/3.3V、最小系统图 V3、订购信息删 `SF32BPRTUN3N6` 且 BGA112 厚度改 T1.03。
 
 ## 待核实问题
 1. **V0.2.2 已精简供电参数**：3.3V 册 Table 4-1/4-2 现仅列 **PVDD（2.97~3.63V，绝对最大 3.63V）**，不再含 VBUS/VBAT/VCC（V0.2 曾一并列出，V0.2.2 按封装实际供电清理）。VBUS/VBAT/VCC 为电池系列供电，3.3V 封装未引出对应引脚（pin19/21/22 = PVDD/VDDIOA/NC），原理图按引脚表布线、不接充电电路。裸 die 双供电能力见 UM §3.1/§3.2。
 2. **Table 4-20 充电模块电气特性出现在本册**属正常（die 共用内置功能），非误植；本系列封装未引出 VBUS/VBAT，无需连接。
-3. **功耗参数已于 V0.2.2 补充实测**（Table 4-5 处理器 @3.8V、Table 4-6 BT/BLE @3.3V，Deepsleep 28µA），低功耗预算可初步核算；草稿值量产前须复核（见 [[SF32LB57_Peripheral_Power]]）。
-4. ~~`SF32BPRTUN3N6` 料号疑误~~ → 已确认 `SF32BPRTUN3N6` ≡ `SF32LB57ZUN3N6`（同配置的特殊/替代订货型号，非笔误），本条闭环。
+3. **功耗参数 V0.2.3 现行值**：Table 4-5 处理器 **@3.3V**（240MHz 11554µA、关机 1.0µA）、Table 4-6 BT/BLE @3.3V、Deepsleep 28µA；V0.2.2 旧值（@3.8V）作废但分版本留存（见 [[SF32LB57_Peripheral_Power]] §8），草稿值量产前须复核。
+4. ~~`SF32BPRTUN3N6` 料号疑误~~ → 已确认 `SF32BPRTUN3N6` ≡ `SF32LB57ZUN3N6`（同配置的特殊/替代订货型号，非笔误）；**V0.2.3 订购表已删除该料号**（4 个料号），历史口径保留于 [[SF32LB57X_Datasheet_V0.2.2]]，实际下单以最新版/原厂为准。
 5. 硬件设计指南（HDG）**已导入**（见 [[SF32LB57_Hardware_Design_Guide]]，全系列 3.3V/电池共用）；仍缺参考设计（RF 设计）/复位·BOOT 外部电路、PCB 布局与 EMC/ESD 规范（用户手册 UM5701 已导入但为寄存器级，无上述硬件设计内容）。
 6. **QFN68 GPIO 数已按 DS 闭环**：DS Table 5-3 标 47；UM Table 5-1 与 pinmux 显示 12 引脚未引出（PA21 + PA45–PA54 + PA57），与 DS 偏差，按用户判定 **以 DS 为准 = 47**。
+7. **SWD 调试引脚（V0.2.3 勘误）**：PA18=**SWCLK**、PA19=**SWDIO**（V0.2.2 曾标反）。57 家族此口径与 52 家族（PA18=SWDIO/PA19=SWCLK）**相反**，调试接线/审图须按家族区分，禁止套用；与 [[SF32LB57_Pinmux]] 一致。

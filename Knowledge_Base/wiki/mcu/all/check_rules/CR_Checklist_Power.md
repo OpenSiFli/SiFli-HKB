@@ -58,7 +58,7 @@ updated: 2026-08-13
 | 28  | VDDIOA 电容规格核查                                                    | SF32LB52X(3.3V) | VDDIOA 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放                                                        |
 | 29  | AVDD33_ANA 电容规格核查                                                | SF32LB52X(3.3V) | AVDD33_ANA 引脚需外接 1μF/6.3V 电容，且电容需靠近引脚摆放                                                      |
 | 30  | BUCK_FB 电容规格核查                                                   | 通用-两系列共用        | BUCK_FB端配置4.7μF电容，放置在电感和芯片管脚之间                                                               |
-| 31  | VDD_VOUT1 电容规格核查                                                 | 通用-两系列共用        | VDD_VOUT1 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放                                                     |
+| 31  | VDD_VOUT1 电容规格核查（仅 SF32LB52 家族） | 通用-两系列共用 | **仅适用 SF32LB52 家族**：VDD_VOUT1 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放；**SF32LB57 家族为 10μF/6.3V**，见 [[CR_SF32LB57_VDD_VOUT1_Capacitor]]（两家族要求不同，禁止跨家族套用） |
 | 32  | VDD_VOUT2 电容规格核查                                                 | 通用-两系列共用        | VDD_VOUT2 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放                                                     |
 | 33  | VDD_RET 电容规格核查                                                   | 通用-两系列共用        | VDD_RET 引脚需外接 0.47μF/6.3V 电容，且电容需靠近引脚摆放                                                      |
 | 34  | VDD_RTC 电容规格核查                                                   | 通用-两系列共用        | VDD_RTC 引脚需外接 1μF/6.3V 电容，且电容需靠近引脚摆放                                                         |
@@ -94,6 +94,7 @@ updated: 2026-08-13
 - [[CR_VBATS_Range]]
 - [[CR_AbsMaxRatings]]
 - 来源摘要：[[SF32LB52_Checklist_V0.1_20241008]]
+- 家族差异对照（57 家族 VDD_VOUT1=10μF/6.3V，非本页 4.7μF）：[[CR_SF32LB57_VDD_VOUT1_Capacitor]]
 
 ## 原始来源完整引用
 1. [SF32LB52 Checklist V0.1 20241008]，Raw：raw/mcu/all_chip/design_checklist/SF32LB52_Checklist_V0.1_20241008.md，章节：电源-供电（共 58 条）。

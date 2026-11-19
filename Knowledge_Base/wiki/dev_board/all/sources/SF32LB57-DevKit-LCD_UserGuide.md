@@ -10,7 +10,7 @@ platform_family: ["SF32LB57"]
 chip_model: ["SF32LB57X"]
 module_model: ["SF32LB57-MOD-WD"]
 created: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-19
 ---
 
 # SF32LB57-DevKit-LCD开发板使用指南
@@ -20,7 +20,6 @@ updated: 2026-11-03
 > 属开发板**演示方案**，**不等于量产强制标准**；与芯片 datasheet / 企业硬件设计指南冲突时，以 datasheet / 硬件设计指南为准。
 > 原始来源：`raw/dev_board/guide/SF32LB57-DevKit-LCD.md`
 
-
 ## 开发板概述
 
 SF32LB57-DevKit-LCD开发板基于高性能 **SF32LB57-MOD-WD** 模组打造，专为 **DPI-RGB 并行显示**、**DCMI 摄像头**、**音频播放/录音** 及 **Wi-Fi** 等多媒体 AIoT 应用场景量身定制。该开发板集成了一颗双核 Arm Cortex-M33 STAR-MC1 @240MHz 的 SF32LB57 芯片，并板载 Wi-Fi / 蓝牙Combo、QSPI 启动 Flash、LCD 连接器、摄像头连接器、音频功放、PDM 麦克风、TF 卡座及树莓派兼容 40P 扩展排针，可充分满足智能 HMI、可视对讲、智能穿戴等产品的研发需求。
@@ -29,7 +28,6 @@ SF32LB57-DevKit-LCD开发板基于高性能 **SF32LB57-MOD-WD** 模组打造，�
 
 依托其完善的硬件架构与接口设计，该开发板可高效助力开发者完成各类接口外设的驱动开发工作，显著降低硬件开发难度、简化研发流程，进而缩短产品从研发到量产上市的周期。
 
-
 ![[raw/dev_board/guide/assets/57DEVKIT_LCD_T_Look.png]]
 
 SF32LB57_DevKit-LCD开发板实物正面照
@@ -37,7 +35,6 @@ SF32LB57_DevKit-LCD开发板实物正面照
 ![[raw/dev_board/guide/assets/57DEVKIT_LCD_B_Look.png]]
 
 SF32LB57_DevKit-LCD开发板实物背面照
-
 
 ### 特性列表
 
@@ -89,16 +86,15 @@ SF32LB57_DevKit-LCD开发板实物背面照
     - IO 扩展器：AW9523BTOR（U11），I2C 接口，扩展 16 路可控 IO
 
 ### 功能框图
-
+  
 ![[raw/dev_board/guide/assets/57DEVKIT_LCD_Block_Diagram.png]]
 
 开发板功能框图
 
-
 ## 组件介绍
 
 SF32LB57-DevKit-LCD 开发板的主板是整个套件的核心，集成了 SF32LB57-MOD-WD 模组，并提供 DPI 显示、摄像头、音频、TF 卡、USB 等接口。
-
+   
 ![[raw/dev_board/guide/assets/57DEVKIT-LCD-T-Notes.svg]]
 
 开发板正面组件标注
@@ -137,7 +133,6 @@ SF32LB57-DevKit-LCD 开发板的主板是整个套件的核心，集成了 SF32L
 - 1 x USB2.0 数据线（标准 A 型转 Type-C 型）
 - 1 x 电脑（Windows、Linux 或 macOS）
 
-> [!note]
 > 1. 如果既要通过 UART 调试，又要使用 USB2.0 FS 功能，需要两根 USB2.0 数据线；
 > 2. 请确保使用支持数据的 USB 数据线，部分数据线仅可用于充电，无法用于数据和程序烧录；
 > 3. 使用摄像头、扬声器、麦克风等外设时，请确认接口方向与线序定义一致。
@@ -199,25 +194,78 @@ U7 的使能由 IO 扩展器信号 **IOEX_WF_PWREN** 控制，软件可独立关
 
 | 管脚 | 管脚名称 | 功能 |
 |:----:|:---------|:-----|
-| 1 | GND | 地 |
-| 2 | VDD_3V3 | 3.3V 电源输入 |
-| 3 | VDD_1V8 | 1.8V 电源输出（内部 LDO） |
-| 4 | RSTN | 复位信号，接复位按键 |
-| 5~22 | PA_41 ~ PA_24 | GPIO / LCDC / SPI / SD / 调试复用 |
-| 23~36 | PA_23 ~ PA_10 | GPIO / I2C / SD / USB / 音频 / 调试复用 |
-| 37 | DAC1P | 音频 DAC 差分输出 P |
+| 1  | PA_41 | GPIO，板上接 DPI_G6 |
+| 2  | PA_40 | GPIO，板上接 DPI_G5 |
+| 3  | PA_39 | GPIO，板上接 DPI_G4 |
+| 4  | PA_38 | GPIO，板上接 DPI_G3 |
+| 5  | PA_37 | GPIO，板上接 DPI_G2 |
+| 6  | PA_36 | GPIO，板上接 USB_DM |
+| 7  | PA_35 | GPIO，板上接 USB_DP |
+| 8  | PA_34 | GPIO，板上接 GPADC 按键 |
+| 9  | PA_33 | GPIO，板上接 DPI_G1 和 DVP_D0 |
+| 10 | PA_32 | GPIO，板上接 DPI_G0 和 DVP_D4 |
+| 11 | PA_31 | GPIO，板上接 DPI_R7 |
+| 12 | PA_30 | GPIO，板上接 DPI_R6 |
+| 13 | PA_29 | GPIO，板上接 DPI_R5 |
+| 14 | PA_28 | GPIO，板上接 DPI_R4 |
+| 15 | PA_27 | GPIO，板上接 DPI_R3 |
+| 16 | PA_26 | GPIO，板上接 DPI_R2 和 DVP_PCLK  |
+| 17 | PA_25 | GPIO，板上接 DPI_R1 和 DVP_D5  |
+| 18 | PA_24 | GPIO，板上接 DPI_R0 和 DVP_D6  |
+| 19 | GND   | 地   |
+| 20 | PA_23 | GPIO，I2C_SDA |
+| 21 | PA_22 | GPIO，I2C_SCL |
+| 22 | 3.3V  | 3.3V 电源输入 |
+| 23 | VBATS | 电池电源检测输入 |
+| 24 | GND   | 地   |
+| 25 | PA_21 | GPIO，接 IO 扩展芯片的 INT 信号 |
+| 26 | PA_20 | GPIO，接触摸屏的 INT 信号 |
+| 27 | PA_19 | GPIO，默认调试信号 DBG_TX，板上接 CH343P 的 RXD |
+| 28 | PA_18 | GPIO，默认调试信号 DBG_RX，板上接 CH343P 的 TXD |
+| 29 | PA_17 | GPIO，模组内部接 Flash，开发板 NC |
+| 30 | PA_16 | GPIO，模组内部接 Flash，开发板 NC |
+| 31 | PA_15 | GPIO，模组内部接 Flash，开发板 NC |
+| 32 | PA_14 | GPIO，模组内部接 Flash，开发板 NC |
+| 33 | PA_13 | GPIO，模组内部接 Flash，开发板 NC |
+| 34 | PA_12 | GPIO，模组内部接 Flash，开发板 NC |
+| 35 | PA_11 | GPIO，接屏的背光信号 |
+| 36 | PA_10 | GPIO，通过跳线选择，板上接 TF 卡座 SD_D0 或 DVP_HSYNC  |
+| 37 | GND   | 地   |
 | 38 | DAC1N | 音频 DAC 差分输出 N |
-| 39 | MICBIAS_PA56 | 麦克风偏置电源 / PDM_CLK |
-| 40 | ADC1P_PA55 | 音频 ADC 输入 P / PDM_DAT |
-| 41 | GND | 地 |
-| 42 | PA_00 | GPIO / USB_DP |
-| 43 | PA_01 | GPIO / USB_DM |
-| 44~53 | PA_07 ~ PA_09, PA_06 | GPIO / SD / 触摸 / USB 检测 |
-| 54 | GND | 地 |
-| 55 | PA_42 | GPIO |
-| 56 | PA_43 | SWCLK / GPIO |
-| 57 | PA_44 | SWDIO / GPIO |
-| 58~? | PA_45 ~ PA_57 | DPI-RGB 数据高位 / PDM / Wi-Fi 唤醒（仅 QFN80/BGA112 模组引出） |
+| 39 | DAC1P | 音频 DAC 差分输出 P |
+| 40 | GND   | 地   |
+| 41 | PA_55 | 音频 ADC 输入 P / PDM_DAT |
+| 42 | PA_56 | 麦克风偏置电源 / PDM_CLK |
+| 43 | GND   | 地   |
+| 44 | PA_09 | GPIO，通过跳线选择，板上接 TF 卡座 SD_CMD 或 DVP_VSYNC  |
+| 45 | PA_08 | GPIO，板上接 TF 卡座 SD_CLK 和 RGB_LED  |
+| 46 | PA_07 | GPIO，板上接 DVP_MCLK |
+| 47 | PA_06 | GPIO，板上接 DVP_D7   |
+| 48 | PA_00 | GPIO，模组内部接 WiFi SD_D2，板上通过跳线选接 DVP_HSYNC，同时 BOOT 信号受 CH343P 控制 |
+| 49 | PA_01 | GPIO，模组内部接 WiFi SD_D3，板上通过跳线选接 DVP_VSYNC |
+| 50 | WF-UART-TXD  | WiFi 调试串口 TXD   |
+| 51 | WF_UART-RXD  | WiFi 调试串口 RXD   |
+| 52 | HST-WAK-WF   | Host Wake WiFi 输入 |
+| 53 | WF_3V3       | WiFi 3.3V 电源输入  |
+| 54 | GND   | 地   |
+| 55 | WF-PWRKEY    | WiFi 开关键输入     |
+| 56 | 2.4G-RFSW    | 57X 的 2.4G 和 WiFi 2.4G 切换控制信号，高电平时切换到 57X 的2.4G 天线，低电平时切换到 WiFi 的 2.4G 天线   |
+| 57 | PA_54 | GPIO，板上接 DPI_B5 |
+| 58 | PA_53 | GPIO，板上接 DPI_B4 |
+| 59 | PA_52 | GPIO，板上接 DPI_B3 |
+| 60 | PA_51 | GPIO，板上接 DPI_VSYNC |
+| 61 | PA_50 | GPIO，板上接 DPI_DE    |
+| 62 | PA_49 | GPIO，板上接 DPI_HSYNC |
+| 63 | PA_48 | GPIO，板上接 DPI_CLK   |
+| 64 | PA_47 | GPIO，板上接 DPI_B7 |
+| 65 | PA_46 | GPIO，板上接 DPI_B6 |
+| 66 | PA_45 | GPIO，板上接 DPI_B2 和 DVP_D2 |
+| 67 | PA_44 | GPIO，板上接 DPI_B1 和 DVP_D1 |
+| 68 | PA_43 | GPIO，板上接 DPI_B0 和 DVP_D3 |
+| 69 | PA_42 | GPIO，板上接 DPI_G7 |
+| 70 | GND   | 地   |
+| 71 | ANT   | 天线接口，天线默认链接模组上的IPEX接口，此管脚为NC   |
+| 72 | GND   | 地   |
 
 > 注：具体模组封装（QFN80 / BGA112）决定 PA45~PA57 是否引出；本开发板使用具备完整 RGB888 及 DVP 接口的模组料号。
 
@@ -276,50 +324,52 @@ FPC1 为 40P 0.5mm 间距上接/下接 FPC 座（FPC-05FB-40PH20），用于连�
 
 | 管脚 | 管脚名称 | 功能 |
 |:----:|:---------|:-----|
-| 1 | 5V | 5V 电源输入（背光或屏驱升压） |
-| 2 | GND | 地 |
-| 3 | PA_24 | DPI_R0 |
-| 4 | PA_25 | DPI_R1 |
-| 5 | PA_26 | DPI_R2 |
-| 6 | PA_27 | DPI_R3 |
-| 7 | PA_28 | DPI_R4 |
-| 8 | PA_29 | DPI_R5 |
-| 9 | PA_30 | DPI_R6 |
-| 10 | PA_31 | DPI_R7 |
-| 11 | GND | 地 |
-| 12 | GND | 地 |
-| 13 | PA_32 | DPI_G0 |
-| 14 | PA_33 | DPI_G1 |
-| 15 | PA_34 | PWRKEY / GPADC_CH6（按键输入） |
-| 16 | PA_35 | USB_DP（与 USB2.0 FS 复用） |
-| 17 | PA_36 | USB_DM（与 USB2.0 FS 复用） |
-| 18 | PA_37 | DPI_G2 |
-| 19 | PA_38 | DPI_G3 |
-| 20 | GND | 地 |
-| 21 | PA_39 | DPI_G4 |
-| 22 | PA_40 | DPI_G5 |
-| 23 | PA_41 | DPI_G6 |
-| 24 | PA_42 | DPI_G7 |
-| 25 | PA_43 | DPI_B0 |
-| 26 | PA_44 | DPI_B1 |
-| 27 | PA_45 | DPI_B2 |
-| 28 | PA_52 | DPI_B3 |
-| 29 | PA_53 | DPI_B4 |
-| 30 | PA_54 | DPI_B5 |
-| 31 | PA_46 | DPI_B6 |
-| 32 | PA_47 | DPI_B7 |
-| 33 | PA_48 | DPI_CLK |
-| 34 | PA_49 | DPI_HSYNC |
-| 35 | PA_50 | DPI_DE |
-| 36 | PA_51 | DPI_VSYNC |
-| 37~40 | 控制信号 | PA_11（BL_PWM）、IOEX_CTP_RST、I2C_SDA（PA_23）、I2C_SCL（PA_22）、IOEX_LCD_RST 中的 4 路，具体线序请对照原理图 / ioconfig 确认 |
+|1   | 5V       | 5V电源输出            |     
+|2   | 5V       | 5V电源输出            |
+|3   | R0       | PA_24，LCDC1_DPI_R0   |
+|4   | R1       | PA_25，LCDC1_DPI_R1   |     
+|5   | R2       | PA_26，LCDC1_DPI_R2   | 
+|6   | R3       | PA_27，LCDC1_DPI_R3   | 
+|7   | R4       | PA_28，LCDC1_DPI_R4   | 
+|8   | R5       | PA_29，LCDC1_DPI_R5   | 
+|9   | R6       | PA_30，LCDC1_DPI_R6   | 
+|10  | R7       | PA_31，LCDC1_DPI_R7   | 
+|11  | GND      | 接地                  |
+|12  | G0       | PA_32，LCDC1_DPI_G0   |
+|13  | G1       | PA_33，LCDC1_DPI_G1   |             
+|14  | G2       | PA_37，LCDC1_DPI_G2   |      
+|15  | G3       | PA_38，LCDC1_DPI_G3   |    
+|16  | G4       | PA_39，LCDC1_DPI_G4   |              
+|17  | G5       | PA_40，LCDC1_DPI_G5   |    
+|18  | G6       | PA_41，LCDC1_DPI_G6   | 
+|19  | G7       | PA_42，LCDC1_DPI_G7   | 
+|20  | GND      | 接地                  |
+|21  | B0       | PA_43，LCDC1_DPI_B0   |    
+|22  | B1       | PA_44，LCDC1_DPI_B1   |    
+|23  | B2       | PA_45，LCDC1_DPI_B2   |    
+|24  | B3       | PA_52，LCDC1_DPI_B3   |    
+|25  | B4       | PA_53，LCDC1_DPI_B4   |    
+|26  | B5       | PA_54，LCDC1_DPI_B5   |    
+|27  | B6       | PA_46，LCDC1_DPI_B6   |    
+|28  | B7       | PA_47，LCDC1_DPI_B7   |    
+|29  | GND      | 接地                  |
+|30  | CLK      | PA_48，LCDC1_DPI_CLK    |    
+|31  | HSYNC    | PA_49，LCDC1_DPI_HSYNC  |     
+|32  | VSYNC    | PA_51，LCDC1_DPI_VSYNC  |     
+|33  | DE       | PA_50，LCDC1_DPI_DE     |  
+|34  | BL       | PA_11，BL_PWM         |  
+|35  | CTP_RST  | IO 扩展芯片 P1_6      | 
+|36  | CTP_SDA  | PA_23，I2C_SDA        |
+|37  | NC       | -                     |
+|38  | CTP_SCL  | PA_22，I2C_SCL        |
+|39  | CTP_INT  | PA_20                 |
+|40  | RESET    | IO 扩展芯片 P1_7      |
 
 > 注：
 >
 > 1. RGB888 全位宽需要 QFN80 / BGA112 封装模组；若使用 RGB565 等低位宽模式，部分数据线可释放为 GPIO 或其他外设。
 > 2. PA35/PA36 在 FPC1 上与 USB2.0 FS 设备口复用，接屏时请勿同时使用 USB 设备口功能。
 > 3. Pins 37~40 控制信号区含 BL_PWM、CTP_RST、LCD_RST、I2C_SDA、I2C_SCL 共 5 路信号，而 FPC1 仅剩 4 个引脚，实际线序请以 `57x LCD-DevKit ioconfig-08192026.xlsx` 及最新版原理图为准。
-
 
 ### 24P DCMI 摄像头 FPC 接口定义
 
@@ -336,21 +386,21 @@ FPC4 为 24P 0.5mm 间距 FPC 座，用于连接 DVP 摄像头模组。
 | 7 | VSYNC | DVP 场同步 |
 | 8 | PWDN | 摄像头掉电控制（IOEX_DVP_PDN） |
 | 9 | HSYNC | DVP 行同步 |
-| 10 | NC | 悬空 |
-| 11 | D0 | DVP 数据位 0 |
-| 12 | D1 | DVP 数据位 1 |
-| 13 | D2 | DVP 数据位 2 |
-| 14 | D3 | DVP 数据位 3 |
-| 15 | D4 | DVP 数据位 4 |
-| 16 | D5 | DVP 数据位 5 |
-| 17 | D6 | DVP 数据位 6 |
-| 18 | D7 | DVP 数据位 7 |
-| 19 | MCLK | 摄像头主时钟 |
-| 20 | PCLK | DVP 像素时钟 |
-| 21 | GND | 地 |
-| 22 | AVDD_2V8 | 摄像头模拟电源 2.8V |
+| 10 | NC/DVDD | 悬空/或摄像头核心电压,具体电压值参考摄像头规格书要求，开发板默认1.5V |
+| 11 | DOVDD_2V8 | 摄像头IO电源 2.8V |
+| 12 | NC/D7  | QSPI 摄像头时为NC; DVP 摄像头时为数据位 7 |
+| 13 | MCLK   | 摄像头主时钟 |
+| 14 | NC/D6  | QSPI 摄像头时为NC; DVP 摄像头时为数据位 6 |
+| 15 | GND    | 地 |
+| 16 | NC/D5  | QSPI 摄像头时为NC; DVP 摄像头时为数据位 5 |
+| 17 | PCLK   | DVP 像素时钟 |
+| 18 | NC/D4  | QSPI 摄像头时为NC; DVP 摄像头时为数据位 4 |
+| 19 | SD0/D0 | QSPI 摄像头时为SD0; DVP 摄像头时为数据位 0 |
+| 20 | SD3/D3 | QSPI 摄像头时为SD3; DVP 摄像头时为数据位 3 |
+| 21 | SD1/D1 | QSPI 摄像头时为SD1; DVP 摄像头时为数据位 1 |
+| 22 | SD2/D2 | QSPI 摄像头时为SD2; DVP 摄像头时为数据位 2 |
 | 23 | NC | 悬空 |
-| 24 | GND | 地 |
+| 24 | NC | 悬空 |
 
 > 注：DCMI 数据线通过跳线选择占用 Wi-Fi SDIO 或 TF 卡 SDIO 管脚，具体以实际 ioconfig 和软件配置为准。默认 ioconfig 中 DVP 与 Wi-Fi/TF 部分信号复用，不可同时使用。
 
@@ -372,8 +422,7 @@ FPC4 为 24P 0.5mm 间距 FPC 座，用于连接 DVP 摄像头模组。
 | LED1 | IOEX_LED_R | AW9523B P1_1 | 红色 |
 | LED2 | IOEX_LED_G | AW9523B P1_2 | 绿色 |
 | LED3 | IOEX_LED_B | AW9523B P1_3 | 蓝色 |
-| U1 | WS2812B | PA_11 | 可寻址 RGB |
-> [!note]
+| U1 | WS2812B | PA_08 | 可寻址 RGB |
 > WS2812B在SF32LB57-DevKit-LCD-V1.0开发板上接的是PA_11，SF32LB57-DevKit-LCD-V1.1上修改为PA_08。
 
 ### IO 扩展器 AW9523B 默认状态
@@ -425,11 +474,11 @@ U11（AW9523BTOR）通过 I2C（PA_22 SCL / PA_23 SDA）与 SF32LB57 通信，�
 **具体请参考**：[固件烧录工具 Impeller](https://wiki.sifli.com/tools/%E7%83%A7%E5%BD%95%E5%B7%A5%E5%85%B7.html)
 
 ### JLink SWD 工具下载与调试
-
+ 
 ![[raw/dev_board/guide/assets/57DEVKIT-LCD-JLINK-Notes.svg]]
 
 开发板 JLink 调试接线图
-
+   
 ![[raw/dev_board/guide/assets/57DEVKIT-JLINK-Adapter.png]]
 
 Jlink调试器接线图
@@ -442,16 +491,49 @@ SWD调试器接线图
 
 ### LCD 显示屏接口
 
-SF32LB57-DevKit-LCD 支持 **DPI-RGB 并行显示接口**：
-
 - 接口类型：40P 0.5mm 间距 FPC 座（FPC1）
 - 默认支持 RGB888，软件可配置 RGB565 / RGB666
 - 支持分辨率、刷新率依具体 LCD 模组规格而定，ePicasso 3.0 硬件加速最高支持 2048×2048
 - 背光控制：PA_11 / BL_PWM
 
+### DPI-RGB 并行显示接口
+
+**推送RGB888数据的排线，屏端FPC座上接触选0.5A类型，屏端FPC座下接触选0.5B类型：**
+- [通用40p-0.5mm](https://item.szlcsc.com/3056935.html?fromZone=s_s__%2522C2856837%2522&spm=sc.gbn.xh1.zy.n___sc.it.hd.ss&lcsc_vid=QAcLUgJQQlQLU1RQEQQKBVEAFAIIU1NQQ1ZZAgJVFVYxVlNTR1FZVFZTTlRfUTsOAxUeFF5JWBIBSRccGwIdBEoFGAxB)
+
+![[raw/dev_board/guide/assets/FPC-REF.png]]
+
+RGB888直连FPC软排线
+
+**推送RGB565数据（此情景可以同时使用DVP接口）的排线：**
+- [专用40p-0.5mm](https://downloads.sifli.com/hardware/files/documentation/ProPrj_FPC_57_40p_to_RGB565%E8%BD%AF%E6%8E%92%E7%BA%BF_2026-11-09.epro2)
+
+![[raw/dev_board/guide/assets/FPC_57_40p_to_RGB565软排线.png]]
+
+RGB565转接FPC软排线
+
+**连接7寸 RGB接口屏**
+
 ![[raw/dev_board/guide/assets/57DEVKIT-LCD-RGB-Panel-Install.png]]
 
- 7寸 RGB 显示屏接线图
+7寸 RGB 显示屏接线图
+
+> 思澈科技 SF32LB5xx-DevKit-LCD开发板的RGB接口线序兼容正点原子40p线序，其他线序的屏幕，请参考[思澈开发板LCM转接板制作指南](../sf32lb52x/SF-DevKit-LCM-Adapter.md)自行做转接板或FPC软排线转接。
+
+### QSPI 显示接口
+
+**连接SFLCM_1p85黄山派屏排线：**
+- [专用40p-0.5mm](https://downloads.sifli.com/hardware/files/documentation/ProPrj_FPC_57_40p_to_SFLCM1p85%E8%BD%AF%E6%8E%92%E7%BA%BF_2026-11-09.epro2)
+
+![[raw/dev_board/guide/assets/FPC_57_40p_to_SFLCM1p85软排线.png]]
+
+SFLCM1p85 QSPI接口屏FPC软排线
+
+**连接SFLCM1p85 QSPI接口屏**
+
+![[raw/dev_board/guide/assets/57DEVKIT-LCD-QSPI-Panel-Install.png]]
+
+1.85寸 QSPI显示屏接线图
 
 **具体请参考：**[屏幕调试工具](https://wiki.sifli.com/tools/%E5%B1%8F%E5%B9%95%E6%A8%A1%E7%BB%84%E8%B0%83%E8%AF%95.html)
 
@@ -481,12 +563,12 @@ SF32LB57-DevKit-LCD 音频部分包含：
 
 ## 相关文档
 
-- [SF32LB57x 芯片规格书](https://wiki.sifli.com/silicon/product-index.html#sf32lb57x)
-- [SF32LB57x 用户手册](https://downloads.sifli.com/user%20manual/)（待发布）
+- [SF32LB57x 芯片规格书](https://wiki.sifli.com/docs/product-index.html)
+- [SF32LB57x 用户手册](https://wiki.sifli.com/docs/product-index.html)
 - [SF32LB57x 硬件设计指南](https://wiki.sifli.com/hardware/SF32LB57x-HW-Application.html)
-- [SF32LB57x 芯片简介](https://wiki.sifli.com/silicon/product-index.html#sf32lb57x)
-
----
+- [SF32LB57x 芯片简介](https://wiki.sifli.com/docs/product-index.html)
+- [SF32LB57-MOD-WD 核心板硬件资料](https://downloads.sifli.com/hardware/files/documentation/SF32LB57-MOD-WD-HW-Docs.zip)
+- [SF32LB57-DevKit-LCD 开发板硬件资料](https://downloads.sifli.com/hardware/files/documentation/SF32LB57-DevKit-LCD-HW-Docs.zip)
 
 ## 关联页面
 - 开发板实体：[[SF32LB57-DevKit-LCD]]
@@ -494,4 +576,3 @@ SF32LB57-DevKit-LCD 音频部分包含：
 - 模组：SF32LB57-MOD-WD（指南内描述，未单独建页）
 - 相关 MCU 外设规范：[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_Display]]、[[SF32LB57_Peripheral_USB]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_Memory]]、[[SF32LB57_Peripheral_BLE_RF]]、[[SF32LB57_Peripheral_Power]]
 - 硬件设计指南（量产以该文档为准）：[[SF32LB57_Hardware_Design_Guide]]
-

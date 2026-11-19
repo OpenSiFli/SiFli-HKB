@@ -1011,9 +1011,6 @@ LCD driver支持列表如`表2-7-1-1`所示:
 
 表2-7-1-3-1 MCU8080 显示屏信号接线表
 
- :align: center
- :class: color-header-table
-
 |MCU8080 16bit Panel Sig |MCU8080 8bit Panel Sig |57x Sig Name |Description |
 | ----------- | ----------- | --------------- | ----------------------------------- |
 | CSX         | CSX         | LCDC_8080_CS    | Chip select                         |
@@ -1375,27 +1372,27 @@ GPADC 功能所对应的 GPIO 引脚分配详情参见`表2-8-9-1`
 
 ### 2.11.最小系统原理图
 
-![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-UH-MHS-SCH-V2.svg]]
+![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-UH-MHS-SCH-V3.svg]]
 
 图2-11-1 QFN68L 电池供电系列芯片最小系统原理图
 
-![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-UL-MHS-SCH-V2.svg]]
+![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-UL-MHS-SCH-V3.svg]]
 
 图2-11-2 QFN68L 3.3V供电系列芯片最小系统原理图
 
-![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-YH-MHS-SCH-V2.svg]]
+![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-YH-MHS-SCH-V3.svg]]
 
 图2-11-3 QFN80L 电池供电系列芯片最小系统原理图
 
-![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-YL-MHS-SCH-V2.svg]]
+![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-YL-MHS-SCH-V3.svg]]
 
 图2-11-4 QFN80L 3.3V供电系列芯片最小系统原理图
 
-![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-VH-MHS-SCH-V2.svg]]
+![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-VH-MHS-SCH-V3.svg]]
 
 图2-11-5 BGA112 电池供电系列芯片最小系统原理图
 
-![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-VL-MHS-SCH-V2.svg]]
+![[raw/mcu/all_chip/hw_design/images/57x/SF32LB57-VL-MHS-SCH-V3.svg]]
 
 图2-11-6 BGA112 3.3V供电系列芯片最小系统原理图
 
@@ -1781,7 +1778,7 @@ USB 充电线路的测试点布置在 TVS 防护管前端；电池座对应的 T
 | 28 | VDDIOA 电容规格核查                 |  | 3.3V供电系列型号 | VDDIOA 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放 |
 | 29 | AVDD33_ANA 电容规格核查             |  | 3.3V供电系列型号 | AVDD33_ANA 引脚需外接 1μF/6.3V 电容，且电容需靠近引脚摆放 |
 | 30 | BUCK_FB 电容规格核查                |  | 所有型号         | BUCK_FB端配置4.7μF电容，放置在电感和芯片管脚之间 |
-| 31 | VDD_VOUT1 电容规格核查              |  | 所有型号         | VDD_VOUT1 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放 |
+| 31 | VDD_VOUT1 电容规格核查              |  | 所有型号         | VDD_VOUT1 引脚需外接 10μF/6.3V 电容，且电容需靠近引脚摆放 |
 | 32 | VDD_VOUT2 电容规格核查              |  | 所有型号         | VDD_VOUT2 引脚需外接 4.7μF/6.3V 电容，且电容需靠近引脚摆放 |
 | 33 | VDD_RET 电容规格核查                |  | 所有型号         | VDD_RET 引脚需外接 0.47μF/6.3V 电容，且电容需靠近引脚摆放 |
 | 34 | VDD_RTC 电容规格核查                |  | 所有型号         | VDD_RTC 引脚需外接 1μF/6.3V 电容，且电容需靠近引脚摆放 |
@@ -2068,6 +2065,7 @@ USB 充电线路的测试点布置在 TVS 防护管前端；电池座对应的 T
 |版本 |日期   |发布说明 |
 |---|---|---|
 |0.0.1 |10/2026 |初始版本 |
+|0.0.2 |11/2026 |更新最小系统原理图，VDD_VOUT1 外接电容由 4.7uF/6.3V 改为 10uF/6.3V |
 
 
 ## 关联页面
@@ -2078,4 +2076,5 @@ USB 充电线路的测试点布置在 TVS 防护管前端；电池座对应的 T
 - 规格书来源（最新）：[[SF32LB57X_Datasheet_V0.2.2]]（3.3V）/ [[SF32LB57x_batt_Datasheet_V0.2.2]]（电池）
 - 用户手册：[[UM5701-SF32LB57x-用户手册_V0p1]]
 - 引脚复用矩阵：[[SF32LB57_Pinmux]]
+- 本指南衍生的审图规则：[[CR_SF32LB57_PowerSeries]]、[[CR_SF32LB57_AbsMaxRatings]]、[[CR_SF32LB57_VDD_VOUT1_Capacitor]]（VDD_VOUT1 电容 10µF/6.3V，与 52 家族 4.7µF 不同）
 - 外设专项：[[SF32LB57_Peripheral_Power]]、[[SF32LB57_Peripheral_GPIO]]、[[SF32LB57_Peripheral_Clock]]、[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_BLE_RF]]、[[SF32LB57_Peripheral_Serial]]、[[SF32LB57_Peripheral_Memory]]、[[SF32LB57_Peripheral_Timer_PWM]]、[[SF32LB57_Peripheral_Display]]、[[SF32LB57_Peripheral_USB]]、[[SF32LB57_Peripheral_TSEN]]、[[SF32LB57_Peripheral_Security]]

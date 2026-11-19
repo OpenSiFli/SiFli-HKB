@@ -3,11 +3,11 @@ title: SF32LB57 电源架构与供电外设
 type: mcu_peripheral
 aliases: ["SF32LB57_Peripheral_Power","SF32LB57电源","SF32LB57 电源架构"]
 tags: ["企业MCU","外设-电源","芯片系列-SF32LB57","原理图审图/故障分析/报告输出"]
-sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[UM5701-SF32LB57x-用户手册_V0p1]]
+sources: [[SF32LB57X_Datasheet_V0.2_20260909],[SF32LB57x_batt_Datasheet_V0.2_20260909],[SF32LB57X_Datasheet_V0.2.2],[SF32LB57x_batt_Datasheet_V0.2.2],[SF32LB57X_Datasheet_V0.2.3],[SF32LB57x_batt_Datasheet_V0.2.3],[UM5701-SF32LB57x-用户手册_V0p1]]
 mcu_family: ["SF32LB57"]
 series_applicability: ["系列相关-见下表"]
 mcu_model: ["SF32LB57X","SF32LB57x"]
-hardware_version: ["QFN68 7x7","QFN80 8x8","BGA112 5.4x4.4","Datasheet V0.2","Datasheet V0.2.2"]
+hardware_version: ["QFN68 7x7","QFN80 8x8","BGA112 5.4x4.4","Datasheet V0.2","Datasheet V0.2.2","Datasheet V0.2.3"]
 created: 2026-09-09
 updated: 2026-09-09
 ---
@@ -15,7 +15,7 @@ updated: 2026-09-09
 ## 摘要
 SF32LB57 家族**两个系列的差异集中在电源架构与电源专用引脚**。本页为双系列电源对照的权威页：3.3V 系列 [[SF32LB57X]] 由外部 PVDD 供电；电池系列 [[SF32LB57x_batt|SF32LB57x]] 由电池经 VCC 供电并内置充电模块。
 
-> ⚠️ 两份规格书均为 **V0.2.2 草稿**（2026-09-24，由 V0.2 演进）：`Table 4-5 处理器功耗`、`Table 4-6 BT/BLE 功耗` **已于 V0.2.2 补充实测值（不再 TBD）**，详见 §8；草稿参数量产前仍须复核。
+> ⚠️ 两份规格书最新为 **V0.2.3 草稿**（2026-11-19）：`Table 4-5 处理器功耗` **在 V0.2.3 两册整体对调并修正测试电压**（3.3V 册 @3.3V / 电池册 @3.8V），V0.2.2 旧值作废但分版本留存于 §8；`Table 4-6 BT/BLE 功耗` 两版未变。草稿参数量产前仍须复核。
 
 ## 1. 双系列电源引脚对照（QFN68 同封装）
 | 引脚 | 3.3V 系列 SF32LB57X | 电池系列 SF32LB57x |
@@ -123,24 +123,12 @@ VDDIOA=4、VBATS=5、PVDD=3、NC=2、BUCK_LX=1、BUCK_FB=80、VDD_VOUT1=79、VDD
 - **Hibernate 合封供电**：外部供电的合封存储应由 **PA21** 控电源开关（QFN68 未引出 → 改用 PA11，见 [[CR_Hibernate_SiP_Supply]]，封装依赖非系列依赖）。
 
 
-## 8. 实测功耗（V0.2.2 新增，Table 4-5 / 4-6）
-> V0.2.2（2026-09-24）补充了 V0.2 全 TBD 的处理器与 BT/BLE 功耗实测值。注意两系列测试电压不同：3.3V 系列处理器 @3.8V、BT/BLE @3.3V；电池系列处理器 @3.3V、BT/BLE @3.8V。
+## 8. 实测功耗（Table 4-5 / 4-6；V0.2.2 新增，V0.2.3 勘误对调）
 
-**3.3V 系列（DS5702 Table 4-5 @3.8V，CoreMark 负载；关机 2.8µA）**
-| 时钟 | CoreMark 电流(µA) | 增量(µA/MHz) |
-|---|---|---|
-| 240MHz | 9989 | 37.88 |
-| 216MHz | 9080 | — |
-| 192MHz | 8160 | 37 |
-| 168MHz | 7270 | — |
-| 144MHz | 5321 | 32 |
-| 120MHz | 4550 | — |
-| 48MHz | 1741 | 28 |
-| 24MHz | 955 | 25 |
-| 12MHz | 658 | — |
-| 关机 | 2.8 | — |
+> ⚠️ **版本冲突分版本留存（重要）**：V0.2.3（2026-11-19）将两册 Table 4-5 处理器功耗**整体对调**（含测试电压）。V0.2.2 时期"3.3V 册处理器 @3.8V / 电池册 @3.3V"的交叉口径来自两册数据贴反，V0.2.3 已修正为 **3.3V 册 @3.3V / 电池册 @3.8V**（各系列回到本系列标称电压，逻辑自洽）。**现行值取 V0.2.3，V0.2.2 旧值保留备查，不覆盖历史**。BT/BLE 功耗 Table 4-6 两版未变。
 
-**电池系列（DS5701 Table 4-5 @3.3V，CoreMark 负载；关机 1.0µA）**
+### 8.1 处理器功耗 — V0.2.3 现行（Table 4-5）
+**3.3V 系列（DS5702 V0.2.3 Table 4-5 @3.3V；关机 1.0µA）**
 | 时钟 | CoreMark 电流(µA) | 增量(µA/MHz) |
 |---|---|---|
 | 240MHz | 11554 | 45 |
@@ -154,7 +142,51 @@ VDDIOA=4、VBATS=5、PVDD=3、NC=2、BUCK_LX=1、BUCK_FB=80、VDD_VOUT1=79、VDD
 | 12MHz | 546 | — |
 | 关机 | 1.0 | — |
 
-**BT/BLE 功耗 — 3.3V 系列（DS5702 Table 4-6 @3.3V，单位 µA；Deepsleep 28µA）**
+**电池系列（DS5701 V0.2.3 Table 4-5 @3.8V；关机 2.8µA）**
+| 时钟 | CoreMark 电流(µA) | 增量(µA/MHz) |
+|---|---|---|
+| 240MHz | 9989 | 37.88 |
+| 216MHz | 9080 | — |
+| 192MHz | 8160 | 37 |
+| 168MHz | 7270 | — |
+| 144MHz | 5321 | 32 |
+| 120MHz | 4550 | — |
+| 48MHz | 1741 | 28 |
+| 24MHz | 955 | 25 |
+| 12MHz | 658 | — |
+| 关机 | 2.8 | — |
+
+### 8.2 处理器功耗 — V0.2.2 历史（已作废，两册贴反，仅备查）
+**3.3V 系列（V0.2.2 Table 4-5 @3.8V；关机 2.8µA）**
+| 时钟 | CoreMark 电流(µA) | 增量(µA/MHz) |
+|---|---|---|
+| 240MHz | 9989 | 37.88 |
+| 216MHz | 9080 | — |
+| 192MHz | 8160 | 37 |
+| 168MHz | 7270 | — |
+| 144MHz | 5321 | 32 |
+| 120MHz | 4550 | — |
+| 48MHz | 1741 | 28 |
+| 24MHz | 955 | 25 |
+| 12MHz | 658 | — |
+| 关机 | 2.8 | — |
+
+**电池系列（V0.2.2 Table 4-5 @3.3V；关机 1.0µA）**
+| 时钟 | CoreMark 电流(µA) | 增量(µA/MHz) |
+|---|---|---|
+| 240MHz | 11554 | 45 |
+| 216MHz | 10471 | — |
+| 192MHz | 9408 | 45 |
+| 168MHz | 8333 | — |
+| 144MHz | 5841 | 36 |
+| 120MHz | 4970 | — |
+| 48MHz | 1823 | 31 |
+| 24MHz | 860 | 26 |
+| 12MHz | 546 | — |
+| 关机 | 1.0 | — |
+
+### 8.3 BT/BLE 功耗（V0.2.2 / V0.2.3 未变）
+**BT/BLE 功耗 — 3.3V 系列（Table 4-6 @3.3V，单位 µA；Deepsleep 28µA）**
 | 模式 | 条件 | 0dBm | 4dBm | 10dBm |
 |---|---|---|---|---|
 | BT Sniff | 50ms(attempt=4) | 177.9 | 193.7 | 226.6 |
@@ -199,7 +231,7 @@ VDDIOA=4、VBATS=5、PVDD=3、NC=2、BUCK_LX=1、BUCK_FB=80、VDD_VOUT1=79、VDD
 > 休眠(Deepsleep) 28µA（两系列一致）；特性页旧宣称 3.3V 系列 1µA@3.3V、电池系列 2.8µA@3.8V 与表 4-6 实测 28µA 不符，以表为准。
 ## 关联页面
 - 3.3V 实体：[[SF32LB57X]]｜电池实体：[[SF32LB57x_batt|SF32LB57x]]｜家族：[[SF32LB57]]
-- 来源：[[SF32LB57X_Datasheet_V0.2.2]]、[[SF32LB57x_batt_Datasheet_V0.2.2]]（V0.2.2，最新）、[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）、[[UM5701-SF32LB57x-用户手册_V0p1]]
+- 来源：[[SF32LB57X_Datasheet_V0.2.3]]、[[SF32LB57x_batt_Datasheet_V0.2.3]]（V0.2.3，最新）、[[SF32LB57X_Datasheet_V0.2.2]]、[[SF32LB57x_batt_Datasheet_V0.2.2]]（V0.2.2，历史）、[[SF32LB57X_Datasheet_V0.2_20260909]]、[[SF32LB57x_batt_Datasheet_V0.2_20260909]]（V0.2，历史）、[[UM5701-SF32LB57x-用户手册_V0p1]]
 - 相关：[[SF32LB57_Peripheral_GPADC]]、[[SF32LB57_Peripheral_Audio]]、[[SF32LB57_Peripheral_Clock]]
 
 ## 原始来源完整引用
@@ -207,10 +239,12 @@ VDDIOA=4、VBATS=5、PVDD=3、NC=2、BUCK_LX=1、BUCK_FB=80、VDD_VOUT1=79、VDD
 2. [DS5702-SF32LB57X V0.2.2]，Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2p2-20261102.pdf`，84 页；Table 4-1/4-2 精简为仅 PVDD、Table 4-5/4-6 新增功耗实测。
 2. [DS5701-SF32LB57x V0.2]，Raw：`raw/mcu/all_chip/datasheets/DS5701-SF32LB57x-芯片技术规格书-V0p2-20260909.pdf`，Table 4-1~4-3（P40）、Table 4-20/4-21（P49）、Table 5-3（P62）。
 3. [UM5701-SF32LB57x-CN V0.1]，第 3 章 电源管理（印刷 p27–35，PDF p42–50）：§3.1/§3.2 双系列电源结构图与电源管脚表、§3.3 充电模块、§3.4 PMUC 寄存器。
+4. [DS5702-SF32LB57X V0.2.3]，Raw：`raw/mcu/all_chip/datasheets/DS5702-SF32LB57X-芯片技术规格书-V0p2p3-20261119.pdf`，84 页；Table 4-5 处理器功耗改为 @3.3V（两册对调）、SWD 引脚对调、VDDIOA 说明补充、最小系统图 V3、订购信息删 1 料号。
+5. [DS5701-SF32LB57x V0.2.3]，Raw：`raw/mcu/all_chip/datasheets/DS5701-SF32LB57x-芯片技术规格书-V0p2p3-20261119.pdf`，85 页；Table 4-5 改为 @3.8V、特性页 SensorHub 2.6mA@3.8V、SWD 对调、最小系统图 V3、订购信息新增 BGA112 料号。
 
 ## 待核实问题
 1. 3.3V 系列是否具备对外 3.3V 输出引脚（特性页称"提供两路对外 3.3V 供电，每路最大 150mA"，但 QFN68 引脚表未标明对应输出脚），待确认。
-2. 功耗参数已于 V0.2.2 补充实测（DS V0.2.2 Table 4-5/4-6，见 §8）；草稿值量产前仍须复核。
+2. 功耗参数 V0.2.2 补充实测、**V0.2.3 对调修正 Table 4-5**（见 §8，现行取 V0.2.3：3.3V 册 @3.3V / 电池册 @3.8V）；草稿值量产前仍须复核。
 3. V0.2.2 已按封装实际供电精简两册 Table 4-1/4-2（3.3V 册仅 PVDD、电池册仅 VBUS/VBAT/VCC）；裸 die 双供电能力由 UM §3.1/§3.2 确认，布线以引脚表为准；待原厂最终确认。
 4. **PVDD 电压范围冲突已按 DS 闭环**：UM §3.2 正文「PVDD 支持 1.8V 至 3.3V」与 DS Table 4-1（2.97~3.63V）不一致；按用户判定 **以 DS 为准 = 2.97~3.63V**，UM 该表述不作数。
 5. **电池系列 QFN80/BGA112 电源引脚**：UM §3.1 Table 3-3 确认有 VDDIOA/AVDD33/VBATS 等外部引脚（仅 QFN68 无 VDDIOA），「无 VDDIOA」仅限 QFN68。
